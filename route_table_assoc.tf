@@ -10,3 +10,4 @@ resource "aws_route_table_association" "priv_1_subnet_eu_west_1a_assoc" {
     route_table_id = "${aws_route_table.priv_route_table.id}"
   
 }
+
