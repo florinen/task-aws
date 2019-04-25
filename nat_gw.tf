@@ -4,6 +4,6 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = "${aws_subnet.pub_1_subnet_eu_west_1a.id}"
 
   tags = {
-    Name = "gw NAT"
+    Name = "NAT-gw"
   }
 }
