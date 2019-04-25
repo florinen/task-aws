@@ -3,7 +3,7 @@
 resource "aws_route" "internet_access" {
     route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
     destination_cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.IGW.id}"
+    gateway_id = "${aws_internet_gateway.igw.id}"
   
 }
 # This will create a route table for the private network
