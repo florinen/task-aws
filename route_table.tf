@@ -7,6 +7,14 @@ resource "aws_route" "internet_access" {
     
   
 }
+resource "aws_route_table" "pub_route_table" {
+    vpc_id = "${aws_vpc.vpc_test}"
+    tags = {
+        Name = "pub_route_table"
+    }
+  
+}
+
 # This will create a route table for the private network
 resource "aws_route_table" "priv_route_table" {
     vpc_id = "${aws_vpc.vpc_test.id}"
