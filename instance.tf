@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-    ami = "${lookup(var.amis, var.aws_region)}"
+    ami = "${var.amis}"
     count = "${var.count}"
     key_name = "${var.key_name}"
     subnet_id = "${aws_subnet.pub_1_subnet_eu_west_1a.id}"
