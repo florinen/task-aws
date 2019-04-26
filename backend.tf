@@ -1,6 +1,5 @@
 terraform {
-    backet = "task-florin"
-    key = "test/tfstate"
-    region = "eu-west-1"
-    
-}
+ backend "s3" {
+   bucket = "task-florin"
+   key = "test"
+   region = "us-east-1"
