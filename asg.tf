@@ -6,7 +6,7 @@ resource "aws_launch_configuration" "web_launch-config" {
 }
 
 # This will create the autoscaling group
-resource "aws_autoscaling_group" "wen_asg" {
+resource "aws_autoscaling_group" "web_asg" {
   name = "web_asg"
   launch_configuration = "${aws_launch_configuration.web_launch-config.name}"
   min_size = "${var.min_size}"
