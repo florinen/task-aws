@@ -14,6 +14,13 @@ resource "aws_security_group" "web" {
         to_port      = "443"
         protocol     = "tcp"
         cidr_blocks  = ["${var.from_anywhere}"]
+    
+    }
+    ingress = {
+        from_port = "22"
+        to_port   = "22"
+        protocol  = "tcp"
+        cidr_blocks = ["${var.from_anywhere}"]
     }
     egress = { # SQL server
         from_port    = "1433"
