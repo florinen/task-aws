@@ -22,6 +22,7 @@ resource "aws_route_table" "priv_route_table" {
     tags = {
         Name = "priv_route_table"
     }
+}
 # This will route traffic for the internet to the NG  
 }
 resource "aws_route" "priv_route" {
