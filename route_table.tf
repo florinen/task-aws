@@ -4,10 +4,7 @@ resource "aws_route" "internet_access" {
     route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
     destination_cidr_block = "${var.to_anywhere}"
     gateway_id = "${aws_internet_gateway.igw.id}"
-
-    tags = {
-        name = "Main_pub_route_table"
-    }
+    
   
 }
 # This will create a route table for the private network
