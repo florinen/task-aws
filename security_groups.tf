@@ -1,6 +1,6 @@
 # Web Servers
 resource "aws_security_group" "web" {
-    name = "aws_vpc"
+    name = "vpc-webserver"
     description = "Allow incoming HTTP connections "
 
     ingress = {

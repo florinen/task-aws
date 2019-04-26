@@ -8,6 +8,7 @@ resource "aws_instance" "web" {
     associate_public_ip_address = "true" # It will asign a public ip if set true
 
    tags = {
+       Name = "${format(web,count.index +1)}"
        environments = "${var.enviroment}${count.index +1}"
        created_by = "${var.created_by}"
    }    
