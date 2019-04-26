@@ -4,33 +4,70 @@ resource "aws_security_group" "web" {
     description = "Allow incoming HTTP connections "
 
     ingress = {
-        from_port = "80"
-        to_port = "80"
-        protocol = "tcp"
-        cidr_blocks = ["${var.from_anywhere}"]
+        from_port    = "80"
+        to_port      = "80"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.from_anywhere}"]
     }
     ingress = {
-        from_port = "443"
-        to_port = "443"
-        protocol = "tcp"
-        cidr_blocks = ["${var.from_anywhere}"]
+        from_port    = "443"
+        to_port      = "443"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.from_anywhere}"]
     }
-    egress = {
-        from_port = "1433"
-        to_port   = "1433"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.priv_1_subnet_cidr}"]
+    egress = { # SQL server
+        from_port    = "1433"
+        to_port      = "1433"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
     }
-    egress = {
-        from_port = "3306"
-        to_port   = "3306"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.priv_1_subnet_cidr}"]
+    egress = { # MySQL
+        from_port    = "3306"
+        to_port      = "3306"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
     }
-    vpc_id = "${aws_vpc.vpc_test.id}"
+    vpc_id   = "${aws_vpc.vpc_test.id}"
 
     tags {
         name = "WebServerSG"
     }
   
+}
+# Database Servers
+resource "aws_security_group" "db" {
+    name = "vpc_db"
+    description = "Allow incoming db connections"
+
+    ingress = {
+        from_port = "1433"
+        to_port   = "1433"
+        protocol  = "tcp"
+        security_groups = ["${aws_security_group.web.id}"]
+    }
+    ingress = {
+        from_port = "3306"
+        to_port   = "3306"
+        protocol  = "tcp"
+        security_groups = ["${aws_security_group.web.id}"] 
+    }
+    egress = {
+        from_port = "80"
+        to_port   = "80"
+        protocol  = "tcp"
+        cidr_blocks = ["${var.to_anywhere}"]
+    }
+    egress = {
+        from_port = "80"
+        to_port   = "80"
+        protocol  = "tcp"
+        cidr_blocks = ["${var.to_anywhere}"]
+    }
+    vpc_id = "${aws_vpc.vpc_test.id}"
+
+    tags = {
+        name = "DBServersSG"
+    }
+
+
 }
