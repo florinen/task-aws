@@ -13,7 +13,7 @@ resource "aws_route_table_association" "pub_1_subnet_eu_west_1a_assoc" {
 # Associate subnet priv_1_subnet_eu_west_1a to private route table
 resource "aws_route_table_association" "priv_1_subnet_eu_west_1a_assoc" {
     subnet_id = "${aws_subnet.priv_1_subnet_eu_west_1a.id}"
-    route_table_id = "${aws_route_table.priv_route_table.route_table_id}"
+    route_table_id = "${aws_route_table.priv_route_table.id}"
   
 }
 
