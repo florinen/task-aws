@@ -2,7 +2,7 @@
 # directed to IGW
 resource "aws_route" "internet_access" {
     route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
-    destination_cidr_block = "0.0.0.0/0"
+    destination_cidr_block = "${var.to_anywhere}"
     gateway_id = "${aws_internet_gateway.igw.id}"
   
 }
@@ -17,7 +17,7 @@ resource "aws_route_table" "priv_route_table" {
 }
 resource "aws_route" "priv_route" {
     route_table_id = "${aws_route_table.priv_route_table.id}"
-    destination_cidr_block = "0.0.0.0/0"
+    destination_cidr_block = "${var.to_anywhere}"
     nat_gateway_id = "${aws_nat_gateway.nat.id}"
   
 }
