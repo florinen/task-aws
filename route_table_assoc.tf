@@ -6,7 +6,7 @@ resource "aws_route_table_association" "pub_1_subnet_eu_west_1a_assoc" {
 }
 # Associate subnet pub_2_subnet_eu_west_1b to public route table
 resource "aws_route_table_association" "pub_2_subnet_eu_west_1b_assoc" {
-    subnet_id = "${aws_subnet.priv_2_subnet_eu_west_1b.id}"
+    subnet_id = "${aws.pub_2_subnet_eu_west_1b.id}"
     route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
   
 }
