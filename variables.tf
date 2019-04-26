@@ -60,6 +60,15 @@ variable "created_by" {
   default = "Florin Nenciu"
   description = "who created the resources"
 }
+variable "min_zise" {
+    default = "2"
+  
+}
+variable "max_zise" {
+    default = "4"
+  
+}
+
 
 
 
