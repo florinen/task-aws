@@ -25,3 +25,4 @@ resource "aws_subnet" "priv_1_subnet_eu_west_1a" {
     }
   
 }
+}
