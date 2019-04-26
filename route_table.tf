@@ -1,6 +1,6 @@
 # This is the public subnet and all traffic destined for internet will be 
 # directed to IGW
-resource "aws_route" "internet_access" {
+resource "aws_route" "pub_route" {
     route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
     destination_cidr_block = "${var.to_anywhere}"
     gateway_id = "${aws_internet_gateway.igw.id}"
@@ -8,12 +8,12 @@ resource "aws_route" "internet_access" {
   
 }
 resource "aws_route_table" "pub_route_table" {
-    vpc_id = "${aws_vpc.vpc_test}"
+    vpc_id = "${aws_vpc.vpc_test.id}"
     tags = {
         Name = "pub_route_table"
     }
   
-}
+
 
 # This will create a route table for the private network
 resource "aws_route_table" "priv_route_table" {
