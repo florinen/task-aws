@@ -27,7 +27,7 @@ resource "aws_security_group" "web" {
         protocol  = "tcp"
         cidr_blocks = ["${var.priv_1_subnet_cidr}"]
     }
-    vpc_id = "${aws_vpc.vpc_test.vpc_id}"
+    vpc_id = "${aws_vpc.vpc_test.id}"
 
     tags {
         name = "WebServerSG"
