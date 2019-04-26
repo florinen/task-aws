@@ -39,33 +39,33 @@ resource "aws_security_group" "db" {
     name = "vpc_db"
     description = "Allow incoming db connections"
 
-    ingress = {
-        from_port = "1433"
-        to_port   = "1433"
-        protocol  = "tcp"
+    ingress = { # SQL server
+        from_port    = "1433"
+        to_port      = "1433"
+        protocol     = "tcp"
         security_groups = ["${aws_security_group.web.id}"]
     }
-    ingress = {
-        from_port = "3306"
-        to_port   = "3306"
-        protocol  = "tcp"
+    ingress = { # MySQL 
+        from_port    = "3306"
+        to_port      = "3306"
+        protocol     = "tcp"
         security_groups = ["${aws_security_group.web.id}"] 
     }
     egress = {
-        from_port = "80"
-        to_port   = "80"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.to_anywhere}"]
+        from_port    = "80"
+        to_port      = "80"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.to_anywhere}"]
     }
     egress = {
-        from_port = "80"
-        to_port   = "80"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.to_anywhere}"]
+        from_port    = "80"
+        to_port      = "80"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.to_anywhere}"]
     }
     vpc_id = "${aws_vpc.vpc_test.id}"
 
-    tags = {
+    tags  = {
         name = "DBServersSG"
     }
 
