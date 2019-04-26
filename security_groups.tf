@@ -37,7 +37,7 @@ resource "aws_security_group" "web" {
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
     tags {
-        name = "WebServerSG"
+        Name = "WebServerSG"
     }
   
 }
@@ -73,7 +73,7 @@ resource "aws_security_group" "db" {
     vpc_id = "${aws_vpc.vpc_test.id}"
 
     tags  = {
-        name = "DBServersSG"
+        Name = "DBServersSG"
     }
 
 
