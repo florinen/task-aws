@@ -22,7 +22,7 @@ variable "pub_1_subnet_cidr" {
 
 variable "priv_1_subnet_cidr" {
     description = "CIDR for the Private Subnet"
-    default = "192.168.10..0/24"
+    default = "192.168.10.0/24"
 }
 variable "from_anywhere" {
     default = "0.0.0.0/0"
