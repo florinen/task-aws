@@ -9,6 +9,9 @@ resource "aws_s3_bucket" "log_bucket" {
   bucket = "my-lb-web-log-bucket"
   acl    = "log-delivery-write"
   region = "eu-west-1"
+  versioning {
+    enabled = true
+  }
 
  }
 
