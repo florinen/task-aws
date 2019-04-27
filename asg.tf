@@ -44,8 +44,7 @@ resource "aws_elb" "elb_web" {
   idle_timeout                = "400"
   connection_draining         = true
   connection_draining_timeout = "400"
-  tags = {
-    name = "elb_web"
+  
   }
   
-}
+
