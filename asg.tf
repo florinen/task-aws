@@ -45,8 +45,7 @@ resource "aws_elb" "elb_web" {
   connection_draining         = true
   connection_draining_timeout = "400"
   tags = {
-    key = "Name"
-    value = "elb_web"
+    name = "elb_web"
   }
   
 }
