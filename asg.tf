@@ -20,7 +20,7 @@ resource "aws_autoscaling_group" "web_asg" {
   
 }
 resource "aws_elb" "elb_web" {
-  name = "elb_web"
+  
   availability_zones = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
   access_logs {
     bucket   = "task-florin"
@@ -44,7 +44,8 @@ resource "aws_elb" "elb_web" {
   idle_timeout                = "400"
   connection_draining         = true
   connection_draining_timeout = "400"
-  
+  tags = {
+    name = "elb_web"
   }
   
-
+}
