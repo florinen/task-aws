@@ -16,7 +16,7 @@ resource "aws_route_table_association" "priv_1_subnet_eu_west_1a_assoc" {
     route_table_id = "${aws_route_table.priv_route_table.id}"
   
 }
-resource "as_route_table_association" "priv_2_subnet_eu_west_1b_assoc" {
+resource "aws_route_table_association" "priv_2_subnet_eu_west_1b_assoc" {
     subnet_id = "${aws_subnet.priv_2_subnet_eu_west_1b.id}"
     route_table_id = "${aws_route_table.priv_route_table.id}"
   
