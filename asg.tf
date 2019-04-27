@@ -21,7 +21,7 @@ resource "aws_autoscaling_group" "web_asg" {
 }
 resource "aws_elb" "elb_web" {
   name = "elb_web"
-  availability_zones = "${lookup(var.pub_1_subnet_cidr)/(var.pub_2_subnet_cidr)}"
+  availability_zones = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
   access_logs {
     bucket   = "task-florin"
     interval = "60"
