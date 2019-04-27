@@ -93,6 +93,10 @@ resource "aws_security_group" "lb_SG" {
         protocol  = "tcp"
         cidr_blocks = ["${var.from_anywhere}"]
     }
+    vpc_id = "${aws_vpc.vpc_test.id}"
+    tags = {
+        Name = "lb-SG"
+    }
   
 }
 
