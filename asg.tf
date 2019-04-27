@@ -24,7 +24,7 @@ resource "aws_lb" "lb_web" {
   name  = "lb_web"
   internal = false
   load_balancer_type = "aplication" 
-  security_groups = "${aws_security_group.lb_SG.id}"
+  security_groups = ["${aws_security_group.lb_SG.id}"]
   subnets = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
   access_logs {
     bucket   = "task-florin"
@@ -33,27 +33,8 @@ resource "aws_lb" "lb_web" {
   }
   tags = {
     Environment = "test"
-  }
-  listener {
-    instance_port     = "80"
-    instance_protocol  = "http"
-    lb_port            = "80"
-    lb_protocol        = "http"
-  }
-  health_check {
-    healthy_threshold    = "3"
-    unhealthy_threshold  = "3"
-    timeout              = "4"
-    target               = "http:80/"
-    interval             = "10"
-  }
-  instances  = ["${aws_launch_configuration.web_launch-config.id}"]
-  cross_zone_load_balancing   = true
-  idle_timeout                = "400"
-  connection_draining         = true
-  connection_draining_timeout = "400"
-  tags = {
-    name = "elb_web"
-  }
+   }
+ 
+ }
   
-}
+
