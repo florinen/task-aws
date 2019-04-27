@@ -39,7 +39,7 @@ resource "aws_elb" "elb_web" {
     target               = "/"
     interval             = "10"
   }
-  instances  = ["${aws_instance.web.id}"]
+  instances  = ["${aws_launch_configuration.web_launch-config.id}"]
   cross_zone_load_balancing   = true
   idle_timeout                = "400"
   connection_draining         = true
