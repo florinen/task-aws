@@ -27,9 +27,9 @@ resource "aws_elb" "elb_web" {
     interval = "60"
   }
   listener {
-    #instance_port     = "80"
+    instance_port     = "80"
     instance_protocol  = "http"
-    #lb_port            = "80"
+    lb_port            = "80"
     lb_protocol        = "http"
   }
   health_check {
@@ -45,7 +45,7 @@ resource "aws_elb" "elb_web" {
   connection_draining         = true
   connection_draining_timeout = "400"
   tags = {
-    name = "elb-web"
+    Name = "elbweb"
   }
   
 }
