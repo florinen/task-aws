@@ -19,12 +19,20 @@ resource "aws_autoscaling_group" "web_asg" {
   vpc_zone_identifier = ["${aws_subnet.pub_1_subnet_eu_west_1a.id}","${aws_subnet.pub_2_subnet_eu_west_1b.id}"]
   
 }
-resource "aws_elb" "elb_web" {
-  
-  availability_zones = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
+# this will create ELB
+resource "aws_lb" "lb_web" {
+  name  = "lb_web"
+  internal = false
+  load_balancer_type = "aplication" 
+  security_groups = "${aws_security_group.lb_SG}"
+  subnets = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
   access_logs {
     bucket   = "task-florin"
     interval = "60"
+    enabled  = true 
+  }
+  tags = {
+    Environment = "test"
   }
   listener {
     instance_port     = "80"
