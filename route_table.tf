@@ -9,15 +9,16 @@ resource "aws_route" "pub_route" {
 resource "aws_route_table" "pub_route_table" {
     vpc_id = "${aws_vpc.vpc_test.id}"
     route {
-        cidr_block = "${var.pub_1_subnet_cidr}"
+        cidr_block = "${var.to_anywhere}"
         gateway_id = "${aws_internet_gateway.igw.id}"
     }
-    route {
-        cidr_block = "${var.pub_2_subnet_cidr}"
-        gateway_id = "${aws_internet_gateway.igw.id}"
-    }
+    #route {
+     #   cidr_block = "${var.pub_2_subnet_cidr}"
+     #   gateway_id = "${aws_internet_gateway.igw.id}"
+    #}
     tags = {
         Name = "pub_route_table"
+        enviroment = "${var.enviroment},${count.index +1}"
     }
 }  
 
