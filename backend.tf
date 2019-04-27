@@ -1,12 +1,13 @@
 terraform {
- backend "s3" {
-  key = "test"
-  acl    = "log-delivery-write"
-  region = "eu-west-1"
- versioning {
+  backend "s3" {
+    backet = "task-florin"
+    key = "test"
+    acl    = "log-delivery-write"
+    region = "eu-west-1"
+  versioning {
     enabled = true
   }
- logging {
+  logging {
     target_bucket = "task-florin"
     target_prefix = "log/"
   }
