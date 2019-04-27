@@ -26,15 +26,16 @@ resource "aws_route_table" "pub_route_table" {
 resource "aws_route_table" "priv_route_table" {
     vpc_id = "${aws_vpc.vpc_test.id}"
     route {
-        cidr_block = "${var.priv_1_subnet_cidr}"
+        cidr_block = "${var.to_anywhere}"
         nat_gateway_id = "${aws_nat_gateway.nat.id}"
     }
-    route {
-        cidr_block = "${var.priv_2_subnet_cidr}"
-        nat_gateway_id = "${aws_nat_gateway.nat.id}"
-    }
+    #route {
+     #   cidr_block = "${var.priv_2_subnet_cidr}"
+     #   nat_gateway_id = "${aws_nat_gateway.nat.id}"
+    #}
     tags = {
         Name = "priv_route_table"
+        environment = "${var.enviroment},${count.index +1 }"
     }
 }
 # This will route traffic for the internet to the NG  

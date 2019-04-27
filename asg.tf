@@ -23,9 +23,9 @@ resource "aws_autoscaling_group" "web_asg" {
 resource "aws_lb" "lb_web" {
   name  = "lb-web"
   internal = false
-  load_balancer_type = "aplication" 
+  load_balancer_type = "" 
   security_groups = ["${aws_security_group.lb_SG.id}"]
-  subnets = ["${var.pub_1_subnet_cidr}","${var.pub_2_subnet_cidr}"]
+  subnets = "${aws_subnet.public.*.id}"
   access_logs {
     bucket   = "task-florin"
     enabled  = true 
