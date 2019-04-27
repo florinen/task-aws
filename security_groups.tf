@@ -10,6 +10,12 @@ resource "aws_security_group" "web" {
         cidr_blocks  = ["${var.from_anywhere}"]
     }
     ingress = {
+        from_port    = "8080"
+        to_port      = "8080"
+        protocol     = "tcp"
+        cidr_blocks  = ["0.0.0.0/0"]
+    } 
+    ingress = {
         from_port    = "443"
         to_port      = "443"
         protocol     = "tcp"
@@ -17,10 +23,10 @@ resource "aws_security_group" "web" {
     
     }
     ingress = {
-        from_port = "22"
-        to_port   = "22"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.from_anywhere}"]
+        from_port    = "22"
+        to_port      = "22"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.from_anywhere}"]
     }
     egress = { # SQL server
         from_port    = "1433"
