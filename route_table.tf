@@ -12,10 +12,7 @@ resource "aws_route_table" "pub_route_table" {
         cidr_block = "${var.to_anywhere}"
         gateway_id = "${aws_internet_gateway.igw.id}"
     }
-    #route {
-     #   cidr_block = "${var.pub_2_subnet_cidr}"
-     #   gateway_id = "${aws_internet_gateway.igw.id}"
-    #}
+    
     tags = {
         Name = "pub_route_table"
         enviroment = "${var.enviroment},${count.index +1}"
@@ -30,10 +27,7 @@ resource "aws_route_table" "priv_route_table" {
         cidr_block = "${var.to_anywhere}"
         nat_gateway_id = "${aws_nat_gateway.nat.id}"
     }
-    #route {
-     #   cidr_block = "${var.priv_2_subnet_cidr}"
-     #   nat_gateway_id = "${aws_nat_gateway.nat.id}"
-    #}
+    
     tags = {
         Name = "priv_route_table"
         environment = "${var.enviroment},${count.index +1 }"
