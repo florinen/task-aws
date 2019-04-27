@@ -84,3 +84,15 @@ resource "aws_security_group" "db" {
 
 
 }
+resource "aws_security_group" "lb_SG" {
+    name = "lb_SG"
+    description = "Allow incoming connections on http"
+    ingress = {
+        from_port = "80"
+        to_port   = "80"
+        protocol  = "tcp"
+        cidr_blocks = "${var.from_anywhere}"
+    }
+  
+}
+
