@@ -3,6 +3,10 @@ resource "aws_launch_configuration" "web_launch-config" {
     image_id = "${var.amis}"
     instance_type = "${var.instance_type}"
     associate_public_ip_address = true
+    security_groups = ["${aws_security_group.web.id}"]
+    lifecycle {
+      create_before_destroy = true
+    }
 }
 
 # This will create the autoscaling group
@@ -11,7 +15,37 @@ resource "aws_autoscaling_group" "web_asg" {
   launch_configuration = "${aws_launch_configuration.web_launch-config.name}"
   min_size = "2"
   max_size = "4"
-  availability_zones = ["eu-west-1a"]
-  vpc_zone_identifier = ["${aws_subnet.priv_1_subnet_eu_west_1a.id}"]#, "${aws_subnet.dev2.id}"]
+  availability_zones = ["eu-west-1a","eu-west-1b"]
+  vpc_zone_identifier = ["${aws_subnet.pub_1_subnet_eu_west_1a.id}","${aws_subnet.pub_2_subnet_eu_west_1b.id}"]
+  
+}
+resource "aws_elb" "elb_web" {
+  name = "elb_web"
+  availability_zones = "${lookup(var.pub_1_subnet_cidr)/(var.pub_2_subnet_cidr)}"
+  access_logs {
+    bucket   = "task-florin"
+    interval = "60"
+  }
+  listener {
+    #instance_port     = "80"
+    instance_protocol  = "http"
+    #lb_port            = "80"
+    lb_protocol        = "http"
+  }
+  health_check {
+    healthy_threshold    = "3"
+    unhealthy_threshold  = "3"
+    timeout              = "4"
+    target               = "/"
+    interval             = "10"
+  }
+  instances  = ["${aws_instance.web.id}"]
+  cross_zone_load_balancing   = true
+  idle_timeout                = "400"
+  connection_draining         = true
+  connection_draining_timeout = "400"
+  tags = {
+    Name = "elb_web"
+  }
   
 }
