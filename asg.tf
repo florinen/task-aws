@@ -36,7 +36,7 @@ resource "aws_elb" "elb_web" {
     healthy_threshold    = "3"
     unhealthy_threshold  = "3"
     timeout              = "4"
-    target               = "http/"
+    target               = "http:80/"
     interval             = "10"
   }
   instances  = ["${aws_launch_configuration.web_launch-config.id}"]
@@ -45,7 +45,7 @@ resource "aws_elb" "elb_web" {
   connection_draining         = true
   connection_draining_timeout = "400"
   tags = {
-    name = "elb_web"
+    name = "elb-web"
   }
   
 }
