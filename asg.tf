@@ -7,7 +7,7 @@ resource "aws_launch_configuration" "web_launch-config" {
     lifecycle {
       create_before_destroy = true
     }
-    name = "${format(web,count.index +1)}" 
+    name = "${format("web",count.index +1)}" 
     
 }
 
