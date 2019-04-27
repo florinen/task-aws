@@ -25,7 +25,7 @@ resource "aws_lb" "lb_web" {
   internal = false
   load_balancer_type = "" 
   security_groups = ["${aws_security_group.lb_SG.id}"]
-  subnets = "${aws_subnet.public.*.id}"
+  subnets = "${aws_subnet.pub_1_subnet_eu_west_1a.*.id}"
   access_logs {
     bucket   = "task-florin"
     enabled  = true 
