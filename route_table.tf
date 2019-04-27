@@ -10,7 +10,14 @@ resource "aws_route" "internet_access" {
 # This will create a route table for the private network
 resource "aws_route_table" "priv_route_table" {
     vpc_id = "${aws_vpc.vpc_test.id}"
-
+    route {
+        cidr_block = "${var.priv_1_subnet_cidr}"
+        nat_gateway_id = "${aws_nat_gateway.nat.id}"
+    }
+    route {
+        cidr_block = "${var.priv_2_subnet_cidr}"
+        nat_gateway_id = "${aws_nat_gateway.nat.id}"
+    }
     tags = {
         Name = "priv_route_table"
     }
