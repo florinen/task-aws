@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "log_bucket" {
 
  }
 
-resource "aws_s3_bucket" "tf_bucker" {
+resource "aws_s3_bucket" "tf_bucket" {
   bucket = "my-tf-test-bucket"
   acl    = "private"
   region = "eu-west-1"
