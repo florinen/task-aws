@@ -1,4 +1,4 @@
-resource "aws_launch_configuration" "web_launch-config" {
+resource "aws_launch_configuration" "l-config" {
     name = "web_launch_config"
     image_id = "${var.amis}"
     instance_type = "${var.instance_type}"
@@ -15,7 +15,7 @@ resource "aws_launch_configuration" "web_launch-config" {
 # This will create the autoscaling group
 resource "aws_autoscaling_group" "web_asg" {
   name = "web_asg"
-  launch_configuration = "${aws_launch_configuration.web_launch-config.id}"
+  launch_configuration = "${aws_launch_configuration.l-config.id}"
   min_size = "2"
   max_size = "4"
   availability_zones = ["eu-west-1a","eu-west-1b"]
@@ -29,10 +29,10 @@ resource "aws_lb" "lb_web" {
   load_balancer_type = "application" 
   security_groups = ["${aws_security_group.lb_SG.id}"]
   subnets = ["${aws_subnet.pub_1_subnet_eu_west_1a.id}","${aws_subnet.pub_2_subnet_eu_west_1b.id}"]
-  access_logs {
-    bucket   = "task-florin"
-    enabled  = true 
-  }
+  #access_logs {
+   # bucket   = "task-florin"
+   # enabled  = true 
+  #}
   tags = {
     Environment = "test"
    }
