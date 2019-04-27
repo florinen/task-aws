@@ -7,7 +7,10 @@ resource "aws_launch_configuration" "web_launch-config" {
     lifecycle {
       create_before_destroy = true
     }
+    Name = "${format("web-", count.index +1)}" 
+    
 }
+
 
 # This will create the autoscaling group
 resource "aws_autoscaling_group" "web_asg" {
