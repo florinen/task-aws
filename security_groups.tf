@@ -91,7 +91,7 @@ resource "aws_security_group" "lb_SG" {
         from_port = "80"
         to_port   = "80"
         protocol  = "tcp"
-        cidr_blocks = "${var.from_anywhere}"
+        cidr_blocks = ["${var.from_anywhere}"]
     }
   
 }
