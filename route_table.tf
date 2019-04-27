@@ -6,6 +6,12 @@ resource "aws_route" "internet_access" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   
 }
+resource "aws_route" "pub_route_table" {
+    route_table_id = "${aws_route.pub_route_table.id}"
+    destination_cidr_block = "${var.to_anywhere}"
+    gateway_id = "${aws_internet_gateway.igw.id}"
+  
+}
 
 # This will create a route table for the private network
 resource "aws_route_table" "priv_route_table" {
