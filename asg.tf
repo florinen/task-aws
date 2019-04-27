@@ -15,7 +15,7 @@ resource "aws_launch_configuration" "web_launch-config" {
 # This will create the autoscaling group
 resource "aws_autoscaling_group" "web_asg" {
   name = "web_asg"
-  launch_configuration = "${aws_launch_configuration.web_launch-config.name}"
+  launch_configuration = "${aws_launch_configuration.web_launch-config.id}"
   min_size = "2"
   max_size = "4"
   availability_zones = ["eu-west-1a","eu-west-1b"]
