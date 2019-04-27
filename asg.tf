@@ -30,7 +30,7 @@ resource "aws_lb" "lb_web" {
   security_groups = ["${aws_security_group.lb_SG.id}"]
   subnets = ["${aws_subnet.pub_1_subnet_eu_west_1a.*.id}","${aws_subnet.pub_2_subnet_eu_west_1b.*.id}"]
   access_logs {
-    bucket   = "task-florin"
+    bucket   = "my-lb-web-log-bucket"
     enabled  = true 
   }
   tags = {
