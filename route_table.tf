@@ -35,10 +35,10 @@ resource "aws_route_table" "priv_route_table" {
 }
 # This will route traffic for the internet to the NG  
 
-resource "aws_route" "priv_route" {
-    route_table_id = "${aws_route_table.priv_route_table.id}"
-    destination_cidr_block = "${var.to_anywhere}"
-    nat_gateway_id = "${aws_nat_gateway.nat.id}"
+#resource "aws_route" "priv_route" {
+#    route_table_id = "${aws_route_table.priv_route_table.id}"
+ #   destination_cidr_block = "${var.to_anywhere}"
+ #   nat_gateway_id = "${aws_nat_gateway.nat.id}"
   
-}
+#}
 
