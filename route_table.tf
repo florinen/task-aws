@@ -12,26 +12,18 @@ resource "aws_route_table" "pub_route_table" {
         cidr_block = "${var.to_anywhere}"
         gateway_id = "${aws_internet_gateway.igw.id}"
     }
+    route {
+        cidr_block = "10.10.0.0/16"
+        vpc_peering_connection_id = "${var.vpc_peer_id}"
+
+    }
     
     tags = {
         Name = "pub_route_table"
         enviroment = "${var.enviroment},${count.index +1}"
     }
 }  
-resource "aws_route_table" "pub_route_table-2" {
-    vpc_id = "${aws_vpc.vpc_test.id}"
-    route {
-        cidr_block = "10.10.0.0/16"
-        vpc_peering_connection_id = "${var.vpc_peer_id}"
 
-    }
- 
-    tags = {
-        Name = "pub_route_table"
-        enviroment = "${var.enviroment},${count.index +1}"
-
-    }
-}
 # This will create a route table for the private network
 resource "aws_route_table" "priv_route_table" {
     vpc_id = "${aws_vpc.vpc_test.id}"
@@ -42,7 +34,7 @@ resource "aws_route_table" "priv_route_table" {
     
     tags = {
         Name = "priv_route_table"
-        environment = "${var.enviroment},${count.index +1 }"
+        
     }
 }
 # This will route traffic for the internet to the NG  
