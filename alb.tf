@@ -20,15 +20,20 @@ resource "aws_lb" "lb_web" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc_test.id}"
-}
+  
+  tags {
+    name = "web_tg"
+  }
+
 health_check {    
     healthy_threshold   = 3    
     unhealthy_threshold = 10    
     timeout             = 5    
     interval            = 10    
-    path                = "http://"    
+    path                = "/"    
     port                = "80"  
   }
+ }
 
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = "${aws_lb.lb_web.arn}"
@@ -52,4 +57,7 @@ resource "aws_lb_listener_rule" "listener_rule" {
     values = ["/"]  
   }
 }
- 
+ resource "aws_autoscaling_attachment" "alb_autoscale" {
+  alb_target_group_arn   = "${aws_lb_target_group.alb_target_group.arn}"
+  autoscaling_group_name = "${aws_autoscaling_group.autoscale_group.id}"
+}
