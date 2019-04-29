@@ -17,7 +17,7 @@ resource "aws_launch_configuration" "l-config" {
 resource "aws_autoscaling_group" "web_asg" {
   name = "web_asg"
   launch_configuration = "${aws_launch_configuration.l-config.id}"
-  load_balancers = "${aws_lb.lb_web.name}"
+  load_balancers = ["${aws_lb.lb_web.name}"]
   min_size = "2"
   max_size = "4"
   availability_zones = ["eu-west-1a","eu-west-1b"]
