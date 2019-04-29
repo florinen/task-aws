@@ -1,6 +1,6 @@
 # Web Servers
 resource "aws_security_group" "web" {
-    name = "aws_vpc"
+    name = "vpc-webserver"
     description = "Allow incoming HTTP connections "
 
     ingress = {
@@ -9,9 +9,17 @@ resource "aws_security_group" "web" {
         protocol     = "tcp"
         cidr_blocks  = ["${var.from_anywhere}"]
     }
+    
     ingress = {
         from_port    = "443"
         to_port      = "443"
+        protocol     = "tcp"
+        cidr_blocks  = ["${var.from_anywhere}"]
+    
+    }
+    ingress = {
+        from_port    = "22"
+        to_port      = "22"
         protocol     = "tcp"
         cidr_blocks  = ["${var.from_anywhere}"]
     }
@@ -30,7 +38,7 @@ resource "aws_security_group" "web" {
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
     tags {
-        name = "WebServerSG"
+        Name = "WebServerSG"
     }
   
 }
@@ -66,8 +74,24 @@ resource "aws_security_group" "db" {
     vpc_id = "${aws_vpc.vpc_test.id}"
 
     tags  = {
-        name = "DBServersSG"
+        Name = "DBServersSG"
     }
 
 
 }
+resource "aws_security_group" "lb_SG" {
+    name = "lb_SG"
+    description = "Allow incoming connections on http"
+    ingress = {
+        from_port = "80"
+        to_port   = "80"
+        protocol  = "tcp"
+        cidr_blocks = ["${var.from_anywhere}"]
+    }
+    vpc_id = "${aws_vpc.vpc_test.id}"
+    tags = {
+        Name = "lb-SG"
+    }
+  
+}
+

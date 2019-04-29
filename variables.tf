@@ -5,9 +5,7 @@ variable "aws_region" {
 
 variable "amis" {
     description = "AMIs by region"
-    default = {
-        eu-west-1 = "ami-0ff760d16d9497662" # Centos 7 x64
-    }
+    default = "ami-050923c342ff6c569" # Centos 7 x64
 }
 
 variable "vpc_cidr" {
@@ -60,6 +58,25 @@ variable "created_by" {
   default = "Florin Nenciu"
   description = "who created the resources"
 }
+variable "min_zise" {
+    default = "2"
+  
+}
+variable "max_zise" {
+    default = "4"
+  
+}
+variable "s3_bucket" {
+    default = "task-florin"
+  
+}
+variable "priority" {
+    description = "Listiner priority value"
+    default = "100"
+  
+}
+
+
 
 
 
