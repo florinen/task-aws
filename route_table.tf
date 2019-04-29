@@ -12,10 +12,6 @@ resource "aws_route_table" "pub_route_table" {
         cidr_block = "${var.to_anywhere}"
         gateway_id = "${aws_internet_gateway.igw.id}"
     }
-    route {
-        cidr_block = "192.168.0.0/16"
-        vpc_peering_connection_id = "${var.vpc_peer_id}"
-    }
     
     tags = {
         Name = "pub_route_table"
@@ -30,10 +26,6 @@ resource "aws_route_table" "priv_route_table" {
     route {
         cidr_block = "${var.to_anywhere}"
         nat_gateway_id = "${aws_nat_gateway.nat.id}"
-    }
-    route {
-        cidr_block = "192.168.0.0/16"
-        vpc_peering_connection_id = "${var.vpc_peer_id}"
     }
     
     tags = {
