@@ -23,8 +23,9 @@ resource "aws_route_table" "pub_route_table-2" {
     route {
         cidr_block = "10.10.0.0/16"
         vpc_peering_connection_id = "${var.vpc_peering_connection_id}"
-        
+
     }
+}
     
     tags = {
         Name = "pub_route_table"
