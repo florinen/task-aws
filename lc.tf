@@ -8,6 +8,6 @@ resource "aws_launch_configuration" "l-config" {
     lifecycle {
       create_before_destroy = true
     }
-   # name = "${format("web",count.index +1)}" 
     
+
 }
