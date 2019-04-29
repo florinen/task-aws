@@ -75,6 +75,11 @@ variable "priority" {
     default = "100"
   
 }
+variable "vpc_peer_id" {
+    default = "pcx-04f0359236523bb30"
+  
+}
+
 
 
 
