@@ -18,6 +18,17 @@ resource "aws_route_table" "pub_route_table" {
         enviroment = "${var.enviroment},${count.index +1}"
     }
 }  
+resource "aws_route_table" "pub_route_table-2" {
+    vpc_id = "${aws_vpc.vpc_test.id}"
+    route {
+        cidr_block = "10.10.0.0/16"
+        vpc_peering_connection_id = "${var.vpc_peering_connection_id}"
+        
+    }
+    
+    tags = {
+        Name = "pub_route_table"
+        enviroment = "${var.enviroment},${count.index +1}"
 
 
 # This will create a route table for the private network
