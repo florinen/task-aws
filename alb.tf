@@ -26,7 +26,7 @@ health_check {
     unhealthy_threshold = 10    
     timeout             = 5    
     interval            = 10    
-    path                = "http:/"    
+    path                = "http://"    
     port                = "80"  
   }
 
@@ -45,11 +45,11 @@ resource "aws_lb_listener_rule" "listener_rule" {
   priority     = "${var.priority}"   
   action {    
     type             = "forward"    
-    target_group_arn = "${aws_alb_target_group.alb_target_group.id}"  
+    target_group_arn = "${aws_alb_target_group.web_tg.id}"  
   }   
   condition {    
     field  = "path-pattern"    
-    values = ["${var.alb_path}"]  
+    values = ["/"]  
   }
 }
  
