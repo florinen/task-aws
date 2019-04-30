@@ -78,9 +78,7 @@ variable "priority" {
 variable "vpc_peer_id" {
     default = "vpc-0ef7225c27938e12e"
 }
-variable "accepter_vpc_id" {
-  
-}
+#variable "accepter_vpc_id" {}
 
 
 
