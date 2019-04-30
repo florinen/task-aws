@@ -7,4 +7,19 @@ resource "aws_vpc" "vpc_test" {
             
     }
   }
+  #VPC peering 
+  resource "aws_vpc_peering_connection" "test_web" {
+  #peer_owner_id = "${var.peer_owner_id}"
+  peer_vpc_id   = "${var.vpc_peer_id}"
+  vpc_id        = "${aws_vpc.vpc_test.id}"
+  auto_accept   = true
+
+  tags = {
+    Name = "VPC Peering between vpc_tesst and vpc_10"
+  }
+}
+
+
+
+
 
