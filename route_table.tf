@@ -16,7 +16,7 @@ resource "aws_route_table" "pub_route_table" {
     }
     route {
         cidr_block = "10.10.0.0/16"
-       # vpc_peering_connection_id = "${var.vpc_peer_id}"
+        vpc_peering_connection_id = "${var.vpc_peer_id}"
 
     }
     
@@ -36,7 +36,7 @@ resource "aws_route_table" "priv_route_table" {
     }
     route {
         cidr_block = "10.10.0.0/16"
-       # vpc_peering_connection_id = "${var.vpc_peer_id}"
+        vpc_peering_connection_id = "${var.vpc_peer_id}"
 
     }
     
