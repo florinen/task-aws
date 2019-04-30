@@ -15,7 +15,7 @@ resource "aws_vpc" "vpc_test" {
   auto_accept   = true
 
   tags = {
-    Name = "VPC Peering between vpc_tesst and vpc_10"
+    Name = "VPC Peering between vpc_test and vpc_10"
   }
 }
 
