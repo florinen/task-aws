@@ -1,7 +1,7 @@
 # Web Servers
 resource "aws_security_group" "web" {
     name = "vpc-webserver"
-    description = "Allow incoming HTTP connections "
+    description = "Allow incoming connections "
 
     ingress = {
         from_port    = "80"
@@ -10,30 +10,25 @@ resource "aws_security_group" "web" {
         cidr_blocks  = ["${var.from_anywhere}"]
     }
     
-    ingress = {
-        from_port    = "443"
-        to_port      = "443"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
+    #ingress = {
+     #   from_port    = "443"
+     #   to_port      = "443"
+     #   protocol     = "tcp"
+     #   cidr_blocks  = ["${var.from_anywhere}"]
     
-    }
+    #}
     ingress = {
         from_port    = "22"
         to_port      = "22"
         protocol     = "tcp"
         cidr_blocks  = ["${var.from_anywhere}"]
     }
-    egress = { # SQL server
-        from_port    = "1433"
-        to_port      = "1433"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
-    }
+    
     egress = { # MySQL
         from_port    = "3306"
         to_port      = "3306"
         protocol     = "tcp"
-        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
+        cidr_blocks  = ["${var.priv_1_subnet_cidr}","${var.priv_2_subnet_cidr}"]
     }
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
@@ -44,20 +39,15 @@ resource "aws_security_group" "web" {
 }
 # Database Servers
 resource "aws_security_group" "db" {
-    name = "vpc_db"
+    name = "db_sg"
     description = "Allow incoming db connections"
 
-    ingress = { # SQL server
-        from_port    = "1433"
-        to_port      = "1433"
-        protocol     = "tcp"
-        security_groups = ["${aws_security_group.web.id}"]
-    }
     ingress = { # MySQL 
         from_port    = "3306"
         to_port      = "3306"
         protocol     = "tcp"
-        security_groups = ["${aws_security_group.web.id}"] 
+        cidr_blocks  = ["${var.from_anywhere}"]
+        #security_groups = ["${aws_security_group.web.id}"] 
     }
     egress = {
         from_port    = "80"
