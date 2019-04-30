@@ -9,10 +9,10 @@ resource "aws_lb" "lb_web" {
   tags = {
     Environment = "test"
    }
-  # access_logs {    
-   # bucket = "${var.s3_bucket}"    
-   # prefix = "ELB-logs"  
-  #}
+   access_logs {    
+   bucket = "${var.s3_bucket}"    
+   prefix = "alb-logs"  
+  }
  
  }
  resource "aws_lb_target_group" "web_tg" {
