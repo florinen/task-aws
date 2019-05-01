@@ -28,6 +28,13 @@ resource "aws_autoscaling_group" "web_asg" {
   vpc_zone_identifier       = ["${aws_subnet.pub_1_subnet_eu_west_1a.id}", "${aws_subnet.pub_2_subnet_eu_west_1b.id}"]
 
 }
+target_tracking_configuration {
+  predefined_metric_specification {
+    predefined_metric_type = "ASGAverageCPUUtilization"
+  }
+
+  target_value = 50.0
+}
 
   
 
