@@ -39,36 +39,36 @@ resource "aws_security_group" "web" {
 }
 # Database Servers
 #resource "aws_security_group" "db" {
-    name = "db_sg"
-    description = "Allow incoming db connections"
+    #name = "db_sg"
+    #description = "Allow incoming db connections"
 
-    ingress = { # MySQL 
-        from_port    = "3306"
-        to_port      = "3306"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
-        #security_groups = ["${aws_security_group.web.id}"] 
-    }
-    egress = {
-        from_port    = "80"
-        to_port      = "80"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.to_anywhere}"]
-    }
-    egress = {
-        from_port    = "80"
-        to_port      = "80"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.to_anywhere}"]
-    }
-    vpc_id = "${aws_vpc.vpc_test.id}"
+    #ingress = { # MySQL 
+     #   from_port    = "3306"
+      #  to_port      = "3306"
+       # protocol     = "tcp"
+      #  cidr_blocks  = ["${var.from_anywhere}"]
+      #  security_groups = ["${aws_security_group.web.id}"] 
+    #}
+    #egress = {
+    #    from_port    = "80"
+     #   to_port      = "80"
+     #   protocol     = "tcp"
+      #  cidr_blocks  = ["${var.to_anywhere}"]
+    #}
+    #egress = {
+     #   from_port    = "80"
+     #   to_port      = "80"
+     #   protocol     = "tcp"
+     #   cidr_blocks  = ["${var.to_anywhere}"]
+    #}
+    #vpc_id = "${aws_vpc.vpc_test.id}"
 
-    tags  = {
-        Name = "DBServersSG"
-    }
+    #tags  = {
+    #    Name = "DBServersSG"
+    #}
 
 
-}
+#}
 
 resource "aws_security_group" "lb_SG" {
     name = "lb_SG"
