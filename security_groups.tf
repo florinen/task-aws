@@ -14,7 +14,8 @@ resource "aws_security_group" "webserver" {
         from_port    = "0"
         to_port      = "65535"
         protocol     = "-1"
-        cidr_blocks  = ["${aws_security_group.lb_SG.name}"]
+        cidr_blocks  = ["${var.from_anywhere}"]
+        security_groups = ["${aws_security_group.webserver.id}"]
     
     }
     ingress = {
