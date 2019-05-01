@@ -38,6 +38,11 @@ variable "to_anywhere" {
     default = "0.0.0.0/0"
   
 }
+variable "vpc-10_cidr_block" {
+    default ="10.10.0.0/16"
+  
+}
+
 variable "count" {
     description = "Total the number of EC2"
     default = 1
