@@ -28,7 +28,7 @@ resource "aws_security_group" "web" {
         from_port    = "3306"
         to_port      = "3306"
         protocol     = "tcp"
-        cidr_blocks  = ["${var.priv_1_subnet_cidr}","${var.priv_2_subnet_cidr}"]
+        cidr_blocks  = ["${var.vpc-10_cidr_block}"]
     }
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
@@ -38,7 +38,7 @@ resource "aws_security_group" "web" {
   
 }
 # Database Servers
-resource "aws_security_group" "db" {
+#resource "aws_security_group" "db" {
     name = "db_sg"
     description = "Allow incoming db connections"
 
@@ -69,6 +69,7 @@ resource "aws_security_group" "db" {
 
 
 }
+
 resource "aws_security_group" "lb_SG" {
     name = "lb_SG"
     description = "Allow incoming connections on http"
