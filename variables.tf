@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "amis" {
     description = "AMIs by region"
-    default = "ami-050923c342ff6c569" # Centos 7 x64
+    default = "ami-0aa438a3e23a5036d" # Centos 7 x64
 }
 
 variable "vpc_cidr" {

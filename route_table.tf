@@ -4,7 +4,7 @@ resource "aws_route" "main_route" {
    route_table_id = "${aws_vpc.vpc_test.main_route_table_id}"
    destination_cidr_block = "${var.to_anywhere}"
    gateway_id = "${aws_internet_gateway.igw.id}"
-   
+     
 }
 
 # Define the public route table
