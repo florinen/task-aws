@@ -13,7 +13,7 @@ resource "aws_autoscaling_group" "web_asg" {
 
   tag {
     key = "Name"
-    value = "ec2 instance"
+    value = "ec2-web"
     propagate_at_launch = true
   }
 }

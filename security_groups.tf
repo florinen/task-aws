@@ -15,7 +15,7 @@ resource "aws_security_group" "webserver" {
         to_port      = "65535"
         protocol     = "-1"
         cidr_blocks  = ["${var.from_anywhere}"]
-        security_groups = ["${aws_security_group.webserver.id}"]
+        security_groups = ["${aws_security_group.lb_SG.id}"]
     
     }
     ingress = {
@@ -79,7 +79,8 @@ resource "aws_security_group" "lb_SG" {
         from_port    = "80"
         to_port      = "80"
         protocol     = "tcp"
-        cidr_blocks  = ["${aws_security_group.webserver.id}"]
+        cidr_blocks  = ["${var.from_anywhere}"]
+        security_groups = ["${aws_security_group.webserver.id}"]
     }
     vpc_id = "${aws_vpc.vpc_test.id}"
     tags = {
