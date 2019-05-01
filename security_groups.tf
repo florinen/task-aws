@@ -1,6 +1,6 @@
 # Web Servers
-resource "aws_security_group" "web" {
-    name = "vpc-webserver"
+resource "aws_security_group" "webserver" {
+    name = "webserver"
     description = "Allow incoming connections "
 
     ingress = {
@@ -10,13 +10,13 @@ resource "aws_security_group" "web" {
         cidr_blocks  = ["${var.from_anywhere}"]
     }
     
-    #ingress = {
-     #   from_port    = "443"
-     #   to_port      = "443"
-     #   protocol     = "tcp"
-     #   cidr_blocks  = ["${var.from_anywhere}"]
+    ingress = {
+        from_port    = "0"
+        to_port      = "65535"
+        protocol     = "-1"
+        cidr_blocks  = ["${aws_security_group.lb_SG.id}"]
     
-    #}
+    }
     ingress = {
         from_port    = "22"
         to_port      = "22"
@@ -24,12 +24,7 @@ resource "aws_security_group" "web" {
         cidr_blocks  = ["${var.from_anywhere}"]
     }
     
-    egress = { # MySQL
-        from_port    = "3306"
-        to_port      = "3306"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.vpc-10_cidr_block}"]
-    }
+    
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
     tags {
@@ -80,10 +75,10 @@ resource "aws_security_group" "lb_SG" {
         cidr_blocks = ["${var.from_anywhere}"]
     }
     ingress = {
-        from_port    = "22"
-        to_port      = "22"
+        from_port    = "80"
+        to_port      = "80"
         protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
+        cidr_blocks  = ["${aws_security_group.webserver.id}"]
     }
     vpc_id = "${aws_vpc.vpc_test.id}"
     tags = {
