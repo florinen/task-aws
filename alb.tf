@@ -45,7 +45,7 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 resource "aws_lb_listener_rule" "listener_rule" {
- # depends_on   = ["${aws_lb_target_group.web_tg.arn}"]  
+ 
   listener_arn = "${aws_lb_listener.front_end.arn}"  
   priority     = "${var.priority}"   
   action {    
