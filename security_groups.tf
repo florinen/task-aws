@@ -9,14 +9,14 @@ resource "aws_security_group" "webserver" {
   }
 }
 
-#resource "aws_security_group_rule" "webserver_self" {
- # type = "ingress"
- # from_port = 0
- # to_port = 0
- # protocol = "-1"
- # self = true
- # security_group_id = "${aws_security_group.webserver.id}"
-#}
+resource "aws_security_group_rule" "webserver_self" {
+  type = "ingress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  self = true
+  security_group_id = "${aws_security_group.webserver.id}"
+}
 resource "aws_security_group_rule" "webserver_ssh" {
   type = "ingress"
   from_port = 22
@@ -31,6 +31,14 @@ resource "aws_security_group_rule" "webserver_http" {
   to_port = 3000
   protocol = "tcp"
   source_security_group_id = "${aws_security_group.lb_SG.id}"
+  security_group_id = "${aws_security_group.webserver.id}"
+}
+resource "aws_security_group_rule" "webserver_db" {
+  type = "ingress"
+  from_port = 3306
+  to_port = 3306
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc-10_cidr_block}"]
   security_group_id = "${aws_security_group.webserver.id}"
 }
 
