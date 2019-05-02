@@ -88,7 +88,14 @@ variable "priority" {
 variable "vpc_peer_id" {
     default = "vpc-0ef7225c27938e12e"
 }
-#variable "accepter_vpc_id" {}
+variable "parent_zone_id" {
+  default     = "Z2YAJVYQEOF2ZN"
+  description = "ID of the hosted zone to contain this record  (or specify `parent_zone_name`)"
+}
+variable "parent_zone_name" {
+  default     = "devopnet.com"
+  description = "Name of the hosted zone to contain this record (or specify `parent_zone_id`)"
+}
 
 
 
