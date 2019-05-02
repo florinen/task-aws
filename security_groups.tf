@@ -4,17 +4,16 @@ resource "aws_security_group" "webserver" {
     description = "Allow incoming connections "
 
     ingress = {
-        from_port    = "80"
-        to_port      = "80"
+        from_port    = "3306"
+        to_port      = "3306"
         protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
+        cidr_blocks  = ["${var.vpc-10_cidr_block}"]
     }
     
     ingress = {
         from_port    = "0"
         to_port      = "65535"
         protocol     = "-1"
-        cidr_blocks  = ["${var.from_anywhere}"]
         security_groups = ["${aws_security_group.lb_SG.id}"]
     
     }
