@@ -27,8 +27,8 @@ resource "aws_security_group_rule" "webserver_ssh" {
 }
 resource "aws_security_group_rule" "webserver_http" {
   type = "ingress"
-  from_port = 3000
-  to_port = 3000
+  from_port = 80
+  to_port = 80
   protocol = "tcp"
   source_security_group_id = "${aws_security_group.lb_SG.id}"
   security_group_id = "${aws_security_group.webserver.id}"
@@ -134,14 +134,14 @@ resource "aws_security_group_rule" "alb_http" {
   cidr_blocks = ["${var.from_anywhere}"]
   security_group_id = "${aws_security_group.lb_SG.id}"
 }
-resource "aws_security_group_rule" "alb_webserver" {
-  type = "egress"
-  from_port = 3000
-  to_port = 3000
-  protocol = "tcp"
-  source_security_group_id = "${aws_security_group.webserver.id}"
-  security_group_id = "${aws_security_group.lb_SG.id}"
-}
+#resource "aws_security_group_rule" "alb_webserver" {
+ # type = "egress"
+ # from_port = 3000
+ # to_port = 3000
+ # protocol = "tcp"
+ # source_security_group_id = "${aws_security_group.webserver.id}"
+ # security_group_id = "${aws_security_group.lb_SG.id}"
+#}
 resource "aws_security_group_rule" "alb_egress" {
   type = "egress"
   from_port = 0
