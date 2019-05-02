@@ -15,7 +15,7 @@ data "aws_elb_hosted_zone_id" "lb_web_dns" {}
  # }
 #}
 resource "aws_route53_record" "nextcloud" {
-  zone_id = "ID:Z2YAJVYQEOF2ZN"
+  zone_id = "IDZ2YAJVYQEOF2ZN"
   name    = "nextcloud.devopnet.com"
   type    = "A"
 
