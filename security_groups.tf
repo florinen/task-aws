@@ -2,6 +2,29 @@
 resource "aws_security_group" "webserver" {
     name = "webserver"
     description = "Allow incoming connections "
+    vpc_id   = "${aws_vpc.vpc_test.id}"
+
+     tags = {
+    Name = "${var.name}-app-server"
+  }
+}
+
+resource "aws_security_group_rule" "webserver_self" {
+  type = "ingress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  self = true
+  security_group_id = "${aws_security_group.webserver.id}"
+}
+
+
+
+
+
+
+
+
 
     ingress = {
         from_port    = "3306"
@@ -14,8 +37,7 @@ resource "aws_security_group" "webserver" {
         from_port    = "0"
         to_port      = "65535"
         protocol     = "-1"
-        cidr_blocks  = ["${var.from_anywhere}"]
-        security_groups = ["${aws_security_group.lb_SG.id}"]
+        se
     
     }
     ingress = {
@@ -26,11 +48,7 @@ resource "aws_security_group" "webserver" {
     }
     
     
-    vpc_id   = "${aws_vpc.vpc_test.id}"
-
-    tags {
-        Name = "WebServerSG"
-    }
+    
   
 }
 # Database Servers

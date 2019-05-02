@@ -42,6 +42,11 @@ variable "vpc-10_cidr_block" {
     default ="10.10.0.0/16"
   
 }
+variable "name" {
+    default = "web"
+  
+}
+
 
 variable "count" {
     description = "Total the number of EC2"
