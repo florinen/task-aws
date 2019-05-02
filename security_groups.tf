@@ -110,7 +110,7 @@ resource "aws_security_group_rule" "webserver_egress" {
 resource "aws_security_group" "lb_SG" {
     name = "lb_SG"
     description = "Allow incoming connections on http"
-    name_prefix = "${var.name}-alb-"
+    #name_prefix = "${var.name}-lb_SG"
     vpc_id = "${aws_vpc.vpc_test.id}"
   
   tags = {
