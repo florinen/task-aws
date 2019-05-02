@@ -1,6 +1,6 @@
 output "public_ip" {
   description = "Public IP of instance"
-  value = ["${aws_launch_configuration.l-config.*.public_ip}"]
+  value = ["${aws_launch_configuration.l-config.*.IP}"]
 }
 output "lb_dns_name" {
   value = "${aws_lb.lb_web.dns_name}"
