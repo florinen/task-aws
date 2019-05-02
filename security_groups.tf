@@ -73,7 +73,7 @@ resource "aws_security_group_rule" "webserver_egress" {
     
     
   
-}
+#}
 # Database Servers
 #resource "aws_security_group" "db" {
     #name = "db_sg"
