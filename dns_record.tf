@@ -1,6 +1,6 @@
 resource "aws_route53_zone" "devopnet" {
   name = "${var.parent_zone_name}"
-  zone_id = "${var.parent_zone_id}"
+  zone_id = "${aws}"
 }
 
 resource "aws_route53_record" "nextcloud" {

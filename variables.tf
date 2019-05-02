@@ -89,11 +89,11 @@ variable "vpc_peer_id" {
     default = "vpc-0ef7225c27938e12e"
 }
 variable "parent_zone_id" {
-  default     = "Z2YAJVYQEOF2ZN"
+  default     = ""
   description = "ID of the hosted zone to contain this record  (or specify `parent_zone_name`)"
 }
 variable "parent_zone_name" {
-  default     = "devopnet.com"
+  default     = ""
   description = "Name of the hosted zone to contain this record (or specify `parent_zone_id`)"
 }
 
