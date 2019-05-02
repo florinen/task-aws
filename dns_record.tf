@@ -20,7 +20,7 @@ resource "aws_route53_record" "nextcloud" {
   type    = "A"
 
   alias {
-    name                   = "${aws_elb.lb_web_dns.dns_name}"
+    name                   = "${aws_elb.lb_web.name}"
     zone_id                = "${aws_elb.devopnet.zone_id}"
     evaluate_target_health = true
   }
