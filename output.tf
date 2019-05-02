@@ -23,3 +23,7 @@ output "lb_dns_name" {
   description = "ALB DNS record"
   value = "${aws_lb.lb_web.dns_name}"
 }
+output "VPX" {
+  description = "VPC peer connection"
+  value = "${aws_vpc_peering_connection.test_web.id}"
+}
