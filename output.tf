@@ -1,7 +1,4 @@
-output "public_ip" {
-  description = "Public IP of eip"
-  value = ["${aws_eip.aws_eip.*.public_ip}"]
-}
+
 output "VPC" {
   description = "VPC created"
   value = "${aws_vpc.vpc_test.id}"
