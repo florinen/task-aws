@@ -34,11 +34,11 @@ resource "aws_route_table" "priv_route_table" {
         cidr_block = "${var.to_anywhere}"
         nat_gateway_id = "${aws_nat_gateway.nat.id}"
     }
-    route {
-        cidr_block = "10.10.0.0/16"
-        vpc_peering_connection_id = "${aws_vpc_peering_connection.test_web.id}"
+    #route {
+     #   cidr_block = "10.10.0.0/16"
+     #   vpc_peering_connection_id = "${aws_vpc_peering_connection.test_web.id}"
 
-    }
+    #}
     
     tags = {
         Name = "priv_route_table"
