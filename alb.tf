@@ -17,7 +17,7 @@ resource "aws_lb" "lb_web" {
  }
  resource "aws_lb_target_group" "web_tg" {
   name     = "web-lb-tg"
-  port     = 80
+  port     = 3000
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc_test.id}"
   
