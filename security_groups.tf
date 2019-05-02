@@ -23,7 +23,7 @@ resource "aws_security_group_rule" "webserver_ssh" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = ["${var.from_anywhere}"]
-  security_group_id = "${aws_security_group.app_server.id}"
+  security_group_id = "${aws_security_group.webserver.id}"
 }
 resource "aws_security_group_rule" "webserver_http" {
   type = "ingress"
