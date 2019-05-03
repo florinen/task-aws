@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "l-config" {
-    name = "lc_web"
+    name = "web-lc"
     image_id = "${var.amis}"
     instance_type = "${var.instance_type}"
     associate_public_ip_address = true
@@ -8,6 +8,7 @@ resource "aws_launch_configuration" "l-config" {
     lifecycle {
       create_before_destroy = true
     }
+    
     
 
 }
