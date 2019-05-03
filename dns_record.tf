@@ -16,12 +16,16 @@ resource "aws_route53_zone" "devopnet" {
 #}
 
 
-resource "aws_route53_record" "my-elb-alias" {
+resource "aws_route53_record" "nextcloud" {
   zone_id = "${aws_route53_zone.devopnet.id}"
   name = "nextcloud"
   type = "A"
   ttl = "300"
-  records = ["${aws_lb.lb_web_dns.name}"]
+  #records = ["${aws_lb.lb_web_dns.name}"]
+  alias {
+      name = "${aws_lb.lb_web.dns_name}"
+      zone_id = "${aws_route53_zone.devopnet.id}"
+  }
 }
 
 
