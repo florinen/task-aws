@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "devopnet" {
-  zone_id = "${var.parent_zone_id}"
+  
   name = "${var.parent_zone_name}"
   
 }
