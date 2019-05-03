@@ -27,7 +27,7 @@ resource "aws_route53_record" "nextcloud" {
   #ttl     = "300"
   #records = ["10.0.0.1"]
   alias {
-      name = "${data.aws_elb_hosted_zone_id.current.dns_name}"
+      name = "${data.aws_elb_hosted_zone_id.current.id}"
       zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
       evaluate_target_health = true
       
