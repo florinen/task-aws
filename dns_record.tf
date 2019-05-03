@@ -14,11 +14,11 @@ resource "aws_route53_zone" "devopnet" {
   #  evaluate_target_health = true
  # }
 #}
-data "aws_route53_zone" "devopnet" {
-  name         = "devopnet.com."
-  private_zone = false
-  vpc_id = "${aws_vpc.vpc_test.id}"
-}
+#data "aws_route53_zone" "devopnet" {
+ # name         = "devopnet.com."
+ # private_zone = false
+ # vpc_id = "${aws_vpc.vpc_test.id}"
+#}
 data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
