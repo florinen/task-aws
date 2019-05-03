@@ -18,6 +18,7 @@ data "aws_route53_zone" "devopnet" {
   name         = "devopnet.com."
   private_zone = false
 }
+data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
   zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
@@ -26,13 +27,30 @@ resource "aws_route53_record" "nextcloud" {
   #ttl     = "300"
   #records = ["10.0.0.1"]
   alias {
-      name = "${aws_lb.lb_web.dns_name}"
+      name = "${data.aws_elb_hosted_zone_id.current.dns_name}"
       zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
       evaluate_target_health = true
       
   }
 }
 
+#resource "aws_elb_hosted_zone_id" "lb_web" { ... }
+
+# pull in the dns zone
+#data "aws_route53_zone" "devopnet_dns" {
+ # name         = "devopnet.com."
+#}
+# create dns record of type "A"
+#resource "aws_route53_record" "nextcloud" {
+ # zone_id = "${data.aws_route53_zone.devopnet_dns.zone_id}"
+ # name    = "${data.aws_route53_zone.devopnet_dns.name}"
+ # type    = "A"
+# create alias (required: name, zone_id)
+#alias {
+ #  name = "${aws_elb_hosted_zone_id.lb_web.domain_name}"
+ #  zone_id = "${aws_elb_hosted_zone_id.lb_web.hosted_zone_id}"
+ # }
+#}
 
 
 
