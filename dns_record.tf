@@ -1,7 +1,7 @@
-#resource "aws_route53_zone" "devopnet" {
-#  name = "${var.parent_zone_name}"
+resource "aws_route53_zone" "devopnet" {
+  name = "${var.parent_zone_name}"
   
-#}
+}
 
 #resource "aws_route53_record" "nextcloud" {
  # zone_id = "${aws_route53_zone.devopnet.id}"
@@ -16,7 +16,6 @@
 #}
 data "aws_route53_zone" "devopnet" {
   name         = "devopnet.com."
-  zone_id = "${var.parent_zone_id}"
   private_zone = false
   vpc_id = "${aws_vpc.vpc_test.id}"
 }
