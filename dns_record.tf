@@ -17,6 +17,7 @@
 data "aws_route53_zone" "devopnet" {
   name         = "devopnet.com."
   private_zone = false
+  vpc_id = "${aws_vpc.vpc_test.vpc_id}"
 }
 data "aws_elb_hosted_zone_id" "current" {}
 
