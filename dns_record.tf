@@ -16,7 +16,7 @@
 #}
 data "aws_route53_zone" "devopnet" {
   name         = "devopnet.com."
-  vpc_id = "${aws_vpc.vpc_test.vpc_id}"
+  vpc_id = "${aws_vpc.vpc_test.id}"
   private_zone = false
 }
 
