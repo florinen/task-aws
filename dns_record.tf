@@ -41,7 +41,7 @@ resource "aws_route53_record" "nextcloud" {
 
 #resource "aws_route53_record" "nextcloud" {
   #zone_id = "Z2YAJVYQEOF2ZN"
-  name = "nextcloud"
+  #name = "nextcloud"
   #type = "A"
   #ttl = "300"
   #records = ["${aws_lb.lb_web_dns.name}"]
