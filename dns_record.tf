@@ -21,7 +21,7 @@ data "aws_route53_zone" "devopnet" {
 
 resource "aws_route53_record" "nextcloud" {
   zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
-  name    = "nextcloud.${data.aws_route53_zone.devopnet.name}"
+  name    = "nextcloud"
   type    = "A"
   #ttl     = "300"
   #records = ["10.0.0.1"]
@@ -29,7 +29,6 @@ resource "aws_route53_record" "nextcloud" {
       name = "${aws_lb.lb_web.dns_name}"
       zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
       evaluate_target_health = true
-      vpc_id = "${aws_vpc.vpc_test.id}"
       
   }
 }
