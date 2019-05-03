@@ -19,7 +19,7 @@ resource "aws_route53_zone" "devopnet" {
 resource "aws_route53_record" "my-elb-alias" {
   zone_id = "${aws_route53_zone.devopnet.id}"
   name = "nextcloud"
-  type = "alias"
+  type = "A"
   ttl = "300"
   records = ["${aws_lb.lb_web.lb_web_dns}"]
 }
