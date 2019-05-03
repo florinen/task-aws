@@ -17,7 +17,7 @@ resource "aws_route53_zone" "devopnet" {
 
 
 resource "aws_route53_record" "nextcloud" {
-  zone_id = "${aws_route53_zone.devopnet.id}"
+  zone_id = "Z2YAJVYQEOF2ZN"
   name = "nextcloud"
   type = "A"
   #ttl = "300"
