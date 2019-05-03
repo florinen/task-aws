@@ -1,22 +1,28 @@
 resource "aws_route53_zone" "devopnet" {
   name = "${var.parent_zone_name}"
-  zone_id = "${aws}"
+  zone_id = "Z2YAJVYQEOF2ZN"
 }
 
-resource "aws_route53_record" "nextcloud" {
+#resource "aws_route53_record" "nextcloud" {
+ # zone_id = "${aws_route53_zone.devopnet.id}"
+ # name    = "devopnet.com"
+  #type    = "A"
+
+  #alias {
+  #  name                   = "${aws_elb.lb_web_dns.name}"
+  #  zone_id                = "${data.aws_route53_zone.devopnet.id}"
+  #  evaluate_target_health = true
+ # }
+#}
+
+
+resource "aws_route53_record" "my-elb-alias" {
   zone_id = "${aws_route53_zone.devopnet.id}"
-  name    = "devopnet.com"
-  type    = "A"
-
-  alias {
-    name                   = "${aws_elb.lb_web_dns.name}"
-    zone_id                = "${data.aws_route53_zone.devopnet.id}"
-    evaluate_target_health = true
-  }
+  name = "nextcloud"
+  type = "alias"
+  ttl = "300"
+  records = ["${aws_elb.lb_web.dns_name}"]
 }
-
-
-
 
 
 
