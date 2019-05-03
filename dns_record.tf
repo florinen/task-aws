@@ -21,7 +21,7 @@ resource "aws_route53_record" "my-elb-alias" {
   name = "nextcloud"
   type = "alias"
   ttl = "300"
-  records = ["${aws_elb.lb_web.dns_name}"]
+  records = ["${aws_lb.lb_web.lb_web_dns}"]
 }
 
 
