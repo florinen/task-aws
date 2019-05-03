@@ -39,6 +39,8 @@ resource "aws_route53_record" "nextcloud" {
 
 
 
+
+
 #resource "aws_route53_record" "nextcloud" {
   #zone_id = "Z2YAJVYQEOF2ZN"
   #name = "nextcloud"
