@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "devopnet" {
-  name = "${var.parent_zone_name}"
+  name = "${var.parent_zone_id}"
   
 }
 
@@ -14,11 +14,11 @@ resource "aws_route53_zone" "devopnet" {
   #  evaluate_target_health = true
  # }
 #}
-data "aws_route53_zone" "devopnet" {
-  name         = "devopnet.com."
-  private_zone = false
-  vpc_id = "${aws_vpc.vpc_test.id}"
-}
+#data "aws_route53_zone" "devopnet" {
+ # name         = "devopnet.com."
+ # private_zone = false
+ # vpc_id = "${aws_vpc.vpc_test.id}"
+#}
 data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
@@ -29,7 +29,7 @@ resource "aws_route53_record" "nextcloud" {
   #records = ["10.0.0.1"]
   alias {
       name = "${data.aws_elb_hosted_zone_id.current.id}"
-      zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
+      zone_id = "${aws_route53_zone.devopnet.zone_id}"
       evaluate_target_health = true
       
   }
