@@ -16,7 +16,6 @@
 #}
 data "aws_route53_zone" "devopnet" {
   name         = "devopnet.com."
-  vpc_id = "${aws_vpc.vpc_test.id}"
   private_zone = false
 }
 
@@ -24,6 +23,8 @@ resource "aws_route53_record" "nextcloud" {
   zone_id = "${data.aws_route53_zone.devopnet.zone_id}"
   name    = "nextcloud.${data.aws_route53_zone.devopnet.name}"
   type    = "A"
+  vpc_id = "${aws_vpc.vpc_test.id}"
+
   #ttl     = "300"
   #records = ["10.0.0.1"]
   alias {
