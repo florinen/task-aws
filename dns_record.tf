@@ -1,8 +1,4 @@
-resource "aws_route53_zone" "devopnet" {
-  
-  name = "${var.parent_zone_name}"
-  
-}
+
 
 #resource "aws_route53_record" "nextcloud" {
  # zone_id = "${aws_route53_zone.devopnet.id}"
@@ -20,11 +16,24 @@ resource "aws_route53_zone" "devopnet" {
  # private_zone = false
  # vpc_id = "${aws_vpc.vpc_test.id}"
 #}
+
+
+
+
+
+
+
+## this will create only the domain name for now.
+resource "aws_route53_zone" "devopnet" {
+  
+  name = "${var.parent_zone_name}"
+  
+}
 data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
-  zone_id = "${aws_route53_zone.devopnet.zone_id}"
-  name    = "nextcloud"
+  zone_id = "${aws_route53_zone.devopnet.id}"
+  name    = "${var.parent_zone_name}"
   type    = "A"
   #ttl     = "300"
   #records = ["10.0.0.1"]
@@ -35,6 +44,8 @@ resource "aws_route53_record" "nextcloud" {
       
   }
 }
+
+
 
 #resource "aws_elb_hosted_zone_id" "lb_web" { ... }
 
