@@ -33,7 +33,7 @@ data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
   zone_id = "${aws_route53_zone.devopnet.zone_id}"
-  name    = "${var.parent_zone_name}"
+  name    = "nextcloud.${var.parent_zone_name}"
   type    = "A"
   #ttl     = "300"
   #records = ["10.0.0.1"]
