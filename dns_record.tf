@@ -39,7 +39,7 @@ resource "aws_route53_record" "nextcloud" {
   #records = ["10.0.0.1"]
   alias {
       name = "${aws_lb.lb_web.dns_name}"
-      zone_id = "${data.aws_elb_hosted_zone_id.current.zone_id}"
+      zone_id = "${data.aws_elb_hosted_zone_id.current.id}"
       evaluate_target_health = false
       
   }
