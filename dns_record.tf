@@ -32,17 +32,14 @@ resource "aws_route53_zone" "devopnet" {
 data "aws_elb_hosted_zone_id" "current" {}
 
 resource "aws_route53_record" "nextcloud" {
-  zone_id = "${aws_route53_zone.devopnet.id}"
+  zone_id = "${aws_route53_zone.devopnet.zone_id}"
   name    = "${var.parent_zone_name}"
   type    = "A"
   #ttl     = "300"
   #records = ["10.0.0.1"]
   alias {
-      target_dns_name = "${aws_lb.lb_web.dns_name}"
-      
-      #target_zone_id = "${aws_lb.lb_web.zone_id}"
-      name = "${data.aws_elb_hosted_zone_id.current.id}"
-      zone_id = "${aws_route53_zone.devopnet.zone_id}"
+      name = "${aws_lb.lb_web.dns_name}"
+      zone_id = "${data.aws_elb_hosted_zone_id.current.zone_id}"
       evaluate_target_health = false
       
   }
