@@ -43,7 +43,7 @@ resource "aws_route53_record" "nextcloud" {
       name = "${data.aws_elb_hosted_zone_id.current.id}"
       zone_id = "${aws_route53_zone.devopnet.zone_id}"
       evaluate_target_health = false
-      t
+      
   }
 }
 
