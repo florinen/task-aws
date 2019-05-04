@@ -12,7 +12,7 @@ resource "aws_vpc" "vpc_test" {
   #peer_owner_id = "${var.peer_owner_id}"
   peer_vpc_id   = "${var.vpc_peer_id}"
   vpc_id        = "${aws_vpc.vpc_test.id}"
-  auto_accept   = true
+  auto_accept   = true   # allowed only if peering is in the same account
 
   tags = {
     Name = "VPC Peering between vpc_tesst and vpc_10"
