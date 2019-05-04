@@ -25,7 +25,7 @@ resource "aws_route53_record" "test" {
   name = "test.${aws_route53_zone.devopnet.name}"
   type = "A"
   ttl = "300"
-  records = ["${var.record_name}"]
+  records = ["${var.ip_add}"]
   
 }  
   #alias {

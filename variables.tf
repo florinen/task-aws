@@ -99,6 +99,8 @@ variable "parent_zone_name" {
 
 
 variable "ip_add" {}
+variable "name_record" {}
+
 
 
 
