@@ -21,11 +21,11 @@ resource "aws_route53_record" "nextcloud" {
   }
 }
 resource "aws_route53_record" "test" {
-  zone_id = "Z2YAJVYQEOF2ZN"
+  zone_id = "${aws_route53_zone.devopnet.zone_id}"
   name = "nextcloud"
   type = "A"
   ttl = "300"
-  records = ["${}"]
+  records = ["${var.record_name}"]
   
 }  
   #alias {
