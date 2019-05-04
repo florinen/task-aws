@@ -97,7 +97,7 @@ variable "parent_zone_name" {
   description = "Name of the hosted zone to contain this record (or specify `parent_zone_id`)"
 }
 
-
+# DNS records
 variable "ip_add" {}
 variable "name_record" {}
 

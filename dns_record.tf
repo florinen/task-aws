@@ -20,6 +20,7 @@ resource "aws_route53_record" "nextcloud" {
       
   }
 }
+## Example of adding A records to your domain zone
 resource "aws_route53_record" "test" {
   zone_id = "${aws_route53_zone.devopnet.zone_id}"
   name = "${var.name_record}.${aws_route53_zone.devopnet.name}"
@@ -28,9 +29,4 @@ resource "aws_route53_record" "test" {
   records = ["${var.ip_add}"]
   
 }  
-  #alias {
-    #  name = "${aws_lb.lb_web.dns_name}"
-   #   zone_id = "${aws_route53_zone.devopnet.id}"
-  #    evaluate_target_health = true
- # }
-#}
+  
