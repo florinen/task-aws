@@ -98,6 +98,7 @@ variable "parent_zone_name" {
 }
 
 
+variable "record_name" {}
 
 
 
