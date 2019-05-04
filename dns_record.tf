@@ -22,7 +22,7 @@ resource "aws_route53_record" "nextcloud" {
 }
 resource "aws_route53_record" "test" {
   zone_id = "${aws_route53_zone.devopnet.zone_id}"
-  name = "test.${aws_route53_zone.devopnet.name}"
+  name = "${var.name_record}.${aws_route53_zone.devopnet.name}"
   type = "A"
   ttl = "300"
   records = ["${var.ip_add}"]
