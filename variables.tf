@@ -9,6 +9,7 @@ variable "amis" {
 }
 variable "lc_name" {
   description = "Enter name of new launch configuration"
+  default = "app_launch_config"
 }
 
 
