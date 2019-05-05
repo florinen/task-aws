@@ -102,8 +102,12 @@ variable "parent_zone_name" {
 }
 
 # DNS records
-variable "ip_add" {}
-variable "name_record" {}
+variable "ip_add" {
+    default = "1.1.1.1"
+}
+variable "name_record" {
+    default = "test"
+}
 
 
 
