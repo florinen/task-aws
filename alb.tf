@@ -9,15 +9,15 @@ resource "aws_lb" "lb_web" {
   tags = {
     Environment = "test"
    }
-  # access_logs {    
-   # bucket = "${var.s3_bucket}"    
-   # prefix = "ELB-logs"  
+   #access_logs {    
+   #bucket = "${var.s3_bucket}"    
+   #prefix = "alb-logs"  
   #}
  
  }
  resource "aws_lb_target_group" "web_tg" {
   name     = "web-lb-tg"
-  port     = 80
+  port     = 3000
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc_test.id}"
   
@@ -30,8 +30,8 @@ health_check {
     unhealthy_threshold = 10    
     timeout             = 5    
     interval            = 10    
-    path                = "/"    
-    port                = "80"  
+    path                = "/health"    
+    port                = "3000"  
   }
  }
 
@@ -45,7 +45,7 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 resource "aws_lb_listener_rule" "listener_rule" {
- # depends_on   = ["${aws_lb_target_group.web_tg.arn}"]  
+ 
   listener_arn = "${aws_lb_listener.front_end.arn}"  
   priority     = "${var.priority}"   
   action {    

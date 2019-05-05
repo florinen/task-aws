@@ -5,8 +5,12 @@ variable "aws_region" {
 
 variable "amis" {
     description = "AMIs by region"
-    default = "ami-050923c342ff6c569" # Centos 7 x64
+    default = "ami-0b38c071879ef1a0b" # Custom Centos 7 x64
 }
+variable "lc_name" {
+  description = "Enter name of new launch configuration"
+}
+
 
 variable "vpc_cidr" {
     description = "CIDR for the whole VPC"
@@ -38,6 +42,16 @@ variable "to_anywhere" {
     default = "0.0.0.0/0"
   
 }
+variable "vpc-10_cidr_block" {
+    default ="10.10.0.0/16"
+  
+}
+variable "name" {
+    default = "web"
+  
+}
+
+
 variable "count" {
     description = "Total the number of EC2"
     default = 1
@@ -75,6 +89,26 @@ variable "priority" {
     default = "100"
   
 }
+variable "vpc_peer_id" {
+    default = "vpc-0ef7225c27938e12e"
+}
+variable "parent_zone_id" {
+  default     = ""
+  description = "ID of the hosted zone to contain this record  (or specify `parent_zone_name`)"
+}
+variable "parent_zone_name" {
+  default     = "devopnet.com"
+  description = "Name of the hosted zone to contain this record (or specify `parent_zone_id`)"
+}
+
+# DNS records
+variable "ip_add" {
+    default = "1.1.1.1"
+}
+variable "name_record" {
+    default = "test"
+}
+
 
 
 

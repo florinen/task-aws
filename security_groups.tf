@@ -1,97 +1,146 @@
-# Web Servers
-resource "aws_security_group" "web" {
-    name = "vpc-webserver"
-    description = "Allow incoming HTTP connections "
-
-    ingress = {
-        from_port    = "80"
-        to_port      = "80"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
-    }
-    
-    ingress = {
-        from_port    = "443"
-        to_port      = "443"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
-    
-    }
-    ingress = {
-        from_port    = "22"
-        to_port      = "22"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.from_anywhere}"]
-    }
-    egress = { # SQL server
-        from_port    = "1433"
-        to_port      = "1433"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
-    }
-    egress = { # MySQL
-        from_port    = "3306"
-        to_port      = "3306"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.priv_1_subnet_cidr}"]
-    }
+# Security Group for Web Servers
+resource "aws_security_group" "webserver" {
+    name = "webserver"
+    description = "Allow incoming connections "
     vpc_id   = "${aws_vpc.vpc_test.id}"
 
-    tags {
-        Name = "WebServerSG"
-    }
-  
+     tags = {
+    Name = "${var.name}-server"
+  }
 }
-# Database Servers
-resource "aws_security_group" "db" {
-    name = "vpc_db"
-    description = "Allow incoming db connections"
 
-    ingress = { # SQL server
-        from_port    = "1433"
-        to_port      = "1433"
-        protocol     = "tcp"
-        security_groups = ["${aws_security_group.web.id}"]
-    }
-    ingress = { # MySQL 
-        from_port    = "3306"
-        to_port      = "3306"
-        protocol     = "tcp"
-        security_groups = ["${aws_security_group.web.id}"] 
-    }
-    egress = {
-        from_port    = "80"
-        to_port      = "80"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.to_anywhere}"]
-    }
-    egress = {
-        from_port    = "80"
-        to_port      = "80"
-        protocol     = "tcp"
-        cidr_blocks  = ["${var.to_anywhere}"]
-    }
-    vpc_id = "${aws_vpc.vpc_test.id}"
-
-    tags  = {
-        Name = "DBServersSG"
-    }
-
-
+#resource "aws_security_group_rule" "webserver_self" {
+ # type = "ingress"
+ # from_port = 0
+ # to_port = 0
+ # protocol = "-1"
+ # self = true
+ # security_group_id = "${aws_security_group.webserver.id}"
+#}
+resource "aws_security_group_rule" "webserver_ssh" {
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["${var.from_anywhere}"]
+  security_group_id = "${aws_security_group.webserver.id}"
 }
+resource "aws_security_group_rule" "webserver_http" {
+  type = "ingress"
+  from_port = 3000
+  to_port = 3000
+  protocol = "tcp"
+  source_security_group_id = "${aws_security_group.lb_SG.id}"
+  security_group_id = "${aws_security_group.webserver.id}"
+}
+resource "aws_security_group_rule" "webserver_db" {
+  type = "ingress"
+  from_port = 3306
+  to_port = 3306
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc-10_cidr_block}"]
+  security_group_id = "${aws_security_group.webserver.id}"
+}
+
+resource "aws_security_group_rule" "webserver_egress" {
+  type = "egress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  cidr_blocks = ["${var.to_anywhere}"]
+  security_group_id = "${aws_security_group.webserver.id}"
+}
+
+
+# Security Group for ALB
 resource "aws_security_group" "lb_SG" {
     name = "lb_SG"
     description = "Allow incoming connections on http"
-    ingress = {
-        from_port = "80"
-        to_port   = "80"
-        protocol  = "tcp"
-        cidr_blocks = ["${var.from_anywhere}"]
-    }
+    #name_prefix = "${var.name}-lb_SG"
     vpc_id = "${aws_vpc.vpc_test.id}"
-    tags = {
-        Name = "lb-SG"
-    }
   
+  tags = {
+    Name = "${var.name}-lb"
+  }
+
 }
+resource "aws_security_group_rule" "alb_http" {
+  type = "ingress"
+  from_port   = "80"
+  to_port     = "80"
+  protocol    = "tcp"
+  cidr_blocks = ["${var.from_anywhere}"]
+  security_group_id = "${aws_security_group.lb_SG.id}"
+}
+resource "aws_security_group_rule" "alb_webserver" {
+  type = "egress"
+  from_port = 3000
+  to_port = 3000
+  protocol = "tcp"
+  source_security_group_id = "${aws_security_group.webserver.id}"
+  security_group_id = "${aws_security_group.lb_SG.id}"
+}
+resource "aws_security_group_rule" "alb_egress" {
+  type = "egress"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+  cidr_blocks = ["${var.to_anywhere}"]
+  security_group_id = "${aws_security_group.lb_SG.id}"
+}
+    
+    
+    
+    
+    #}
+# Database Servers
+#resource "aws_security_group" "db" {
+    #name = "db_sg"
+    #description = "Allow incoming db connections"
+
+    #ingress = { # MySQL 
+     #   from_port    = "3306"
+      #  to_port      = "3306"
+       # protocol     = "tcp"
+      #  cidr_blocks  = ["${var.from_anywhere}"]
+      #  security_groups = ["${aws_security_group.web.id}"] 
+    #}
+    #egress = {
+    #    from_port    = "80"
+     #   to_port      = "80"
+     #   protocol     = "tcp"
+      #  cidr_blocks  = ["${var.to_anywhere}"]
+    #}
+    #egress = {
+     #   from_port    = "80"
+     #   to_port      = "80"
+     #   protocol     = "tcp"
+     #   cidr_blocks  = ["${var.to_anywhere}"]
+    #}
+    #vpc_id = "${aws_vpc.vpc_test.id}"
+
+    #tags  = {
+    #    Name = "DBServersSG"
+    #}
+
+
+#}
+    #ingress = {
+     #   from_port = "80"
+     #   to_port   = "80"
+     #   protocol  = "tcp"
+     #   cidr_blocks = ["${var.from_anywhere}"]
+    #}
+    #ingress = {
+     #   from_port    = "0"
+     #   to_port      = "65535"
+     #   protocol     = "-1"
+     #   security_groups = ["${aws_security_group.webserver.id}"]
+    #}
+    
+    #tags = {
+     #   Name = "lb-SG"
+    #}
+  
+#}
 
