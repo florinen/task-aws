@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "l-config" {
-    name = "lc-web"
+    name = ""
     image_id = "${var.amis}"
     instance_type = "${var.instance_type}"
     associate_public_ip_address = true

@@ -7,6 +7,10 @@ variable "amis" {
     description = "AMIs by region"
     default = "ami-0b38c071879ef1a0b" # Custom Centos 7 x64
 }
+variable "lc_name" {
+  description = "Enter name of new launch configuration"
+}
+
 
 variable "vpc_cidr" {
     description = "CIDR for the whole VPC"
