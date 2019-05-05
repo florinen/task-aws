@@ -30,7 +30,7 @@ health_check {
     unhealthy_threshold = 10    
     timeout             = 5    
     interval            = 10    
-    path                = "/"    
+    path                = "/health"    
     port                = "80"  
   }
  }
