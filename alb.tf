@@ -31,7 +31,7 @@ health_check {
     timeout             = 5    
     interval            = 10    
     path                = "/health"    
-    port                = "80"  
+    port                = "3000"  
   }
  }
 
