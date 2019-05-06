@@ -24,7 +24,7 @@ sudo mv nextcloud/ /var/www/html/
 sudo mkdir /var/www/html/nextcloud/data
 
 # Give apache user and group the ownership of nextcloud folder
-sudo chown apache:apache -R /var/www/html/nextcloud/data
+#sudo chown apache:apache -R /var/www/html/nextcloud/data
 sudo chown apache:apache -R /var/www/html/nextcloud
 
 # Configure Apache VirtualHost, configuration file for Nextcloud
