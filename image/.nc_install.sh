@@ -49,6 +49,7 @@ sudo systemctl enable --now httpd
 
 # Configure the firewall to allow access to the Nextcloud storage from external machines.
 sudo yum -y install firewalld
+sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-service={http,https} --permanent
 sudo firewall-cmd --reload
 
