@@ -53,6 +53,9 @@ sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-service={http,https} --permanent
 sudo firewall-cmd --reload
 
+# To add port 3000 to port contexts, enter:
+sudo semanage port -a -t http_port_t -p tcp 3000
+
 # Set SELinux context to allow NextCloud to write the data inside its important directories
 sudo semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/nextcloud/data'
 sudo semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/nextcloud/config(/.*)?'
