@@ -43,7 +43,7 @@ sudo cat <<EOF >  /etc/httpd/conf.d/nextcloud.conf
 EOF
 
 # Change the Listening port to mach the one configure on your SG
-sudo sed -i '0,/Listen [0-9]*/s//Listen 3000/' /etc/httpd/conf/httpd.conf
+sudo  sed -i.bak 's/.*Listen 80/Listen 3000 '$serverPort'/' /etc/httpd/conf/httpd.conf
 sudo sed -i "/^<Directory \"\/var\/www\/html\">/,/^<\/Directory>/{s/AllowOverride None/AllowOverride All/g}" /etc/httpd/conf/httpd.conf
 sudo systemctl enable --now httpd
 
