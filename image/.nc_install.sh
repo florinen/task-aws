@@ -51,6 +51,7 @@ sudo systemctl enable --now httpd
 sudo yum -y install firewalld
 sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-service={http,https} --permanent
+sudo firewall-cmd --add-port=3000/tcp --permanent
 sudo firewall-cmd --reload
 
 # To add port 3000 to port contexts, enter:
