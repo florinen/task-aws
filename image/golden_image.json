@@ -15,7 +15,7 @@
      "provisioners": [
          {
              "type": "shell",
-             "execute_command": "echo '' | sudo -S su - root -c '{{ .Path }}'",
+             "execute_command": "chmod +x {{ .Path }}",
              "script": ".nc_install.sh"
               
          }
