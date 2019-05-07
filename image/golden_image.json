@@ -1,15 +1,11 @@
 {
- "builders": [{
-    "type": "amazon-ebs",
-    "region": "eu-west-1",
-    "source_ami": "ami-082083b64ec9ae91f",
-    "instance_type": "t2.micro",
-    "ssh_username": "centos",
-    "ami_name": "nextcloud-{{timestamp}}",
-    "tags": {
-        "Name": "nextcloud-{{timestamp}}",
-        "OS_Version": "Centos 7"
-    }
+    "builders": [{
+        "type": "amazon-ebs",
+        "region": "eu-west-1",
+        "source_ami": "ami-02a39bdb8e8ee056a",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "ami_name": "florin-{{timestamp}}"
 
      }],
      "provisioners": [
@@ -22,3 +18,4 @@
      ]
 
 }
+
