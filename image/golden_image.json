@@ -5,7 +5,7 @@
     "source_ami": "ami-0ff760d16d9497662",
     "instance_type": "t2.micro",
     "ssh_username": "centos",
-    "ami_name": "nextcloud-{{timestamp | golden_ami_name}}",
+    "ami_name": "nextcloud-{{timestamp}}",
     "tags": {
         "Name": "nextcloud-{{timestamp}}",
         "OS_Version": "Centos 7"
