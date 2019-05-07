@@ -16,7 +16,7 @@
          {
              "type": "shell",
              "execute_command": "echo '' | sudo -S su - root -c '{{ .Path }}'",
-             "script": "/root/task-aws/image/.nc_install.sh"
+             "script": ".nc_install.sh"
               
          }
      ]
