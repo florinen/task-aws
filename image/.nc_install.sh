@@ -45,6 +45,11 @@ EOF
 # Change the Listening port to mach the one configure on your SG
 sudo  sed -i.bak 's/.*Listen 80/Listen 3000 '$serverPort'/' /etc/httpd/conf/httpd.conf
 sudo sed -i "/^<Directory \"\/var\/www\/html\">/,/^<\/Directory>/{s/AllowOverride None/AllowOverride All/g}" /etc/httpd/conf/httpd.conf
+
+# To allow Apache to connect to remote database through SELinux
+sudo setsebool httpd_can_network_connect_db on
+
+#Start and enable Apache server
 sudo systemctl enable --now httpd
 
 # Add a file for ALB health check
@@ -60,9 +65,6 @@ sudo firewall-cmd --reload
 
 # To add port 3000 to port contexts, enter:
 #sudo semanage port -a -t http_port_t -p tcp 3000
-
-# To allow Apache to connect to remote database through SELinux
-sudo setsebool httpd_can_network_connect_db on
 
 # Set SELinux context to allow NextCloud to write the data inside its important directories
 sudo semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/nextcloud/data'
