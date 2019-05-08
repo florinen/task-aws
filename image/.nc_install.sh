@@ -62,7 +62,7 @@ sudo firewall-cmd --reload
 #sudo semanage port -a -t http_port_t -p tcp 3000
 
 # To allow Apache to connect to remote database through SELinux
-sudo setsebool httpd_can_network_connect_db 1
+sudo setsebool httpd_can_network_connect_db on
 
 # Set SELinux context to allow NextCloud to write the data inside its important directories
 sudo semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/nextcloud/data'
