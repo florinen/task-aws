@@ -51,15 +51,15 @@ sudo systemctl enable --now httpd
 sudo touch /var/www/html/health
 
 # Configure the firewall to allow access to the Nextcloud storage from external machines.
+# If you are customizing the Listining port, make sure you are forwarding 80 to that port in firewall
 sudo yum -y install firewalld
 sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-service={http,https} --permanent
 sudo firewall-cmd --zone=public --add-forward-port=port=80:proto=tcp:toport=3000 --permanent
-#sudo firewall-cmd --add-port=3000/tcp --permanent
 sudo firewall-cmd --reload
 
 # To add port 3000 to port contexts, enter:
-sudo semanage port -a -t http_port_t -p tcp 3000
+#sudo semanage port -a -t http_port_t -p tcp 3000
 
 # To allow Apache to connect to remote database through SELinux
 sudo setsebool httpd_can_network_connect_db 1
