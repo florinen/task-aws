@@ -31,9 +31,11 @@ sudo chown apache:apache -R /var/www/html/nextcloud
 sudo cat <<EOF >  /etc/httpd/conf.d/nextcloud.conf
 <VirtualHost *:3000>
   ServerName nextcloud.devopnet.com
+  ServerAlias www.nextcloud.devopnet.com
   DocumentRoot /var/www/html/nextcloud
   <directory /var/www/html/nextcloud>
-    Require all granted
+    DirectoryIndex index.html index.php
+	  Require all granted
     AllowOverride All
     Options FollowSymLinks MultiViews
     SetEnv HOME /var/www/html/nextcloud
