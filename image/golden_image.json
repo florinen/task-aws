@@ -6,7 +6,9 @@
     "instance_type": "t2.micro",
     "ssh_username": "centos",
     "ami_name": "nextcloud-{{timestamp}}",
-    "most_recent": true,
+    "source_ami_filter": {
+        "most_recent": true
+    },
     "tags": {
         "Name": "nextcloud-{{timestamp +1}}",
         "OS_Version": "Centos 7"
