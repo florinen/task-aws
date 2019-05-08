@@ -47,11 +47,15 @@ sudo  sed -i.bak 's/.*Listen 80/Listen 3000 '$serverPort'/' /etc/httpd/conf/http
 sudo sed -i "/^<Directory \"\/var\/www\/html\">/,/^<\/Directory>/{s/AllowOverride None/AllowOverride All/g}" /etc/httpd/conf/httpd.conf
 sudo systemctl enable --now httpd
 
+# Add a file for ALB health check
+sudo touch /var/www/html/health
+
 # Configure the firewall to allow access to the Nextcloud storage from external machines.
 sudo yum -y install firewalld
 sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-service={http,https} --permanent
-sudo firewall-cmd --add-port=3000/tcp --permanent
+sudo firewall-cmd --zone=public --add-forward-port=port=80:proto=tcp:toport=3000 --permanent
+#sudo firewall-cmd --add-port=3000/tcp --permanent
 sudo firewall-cmd --reload
 
 # To add port 3000 to port contexts, enter:
