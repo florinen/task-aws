@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # run packer (prints to stdout, but stores the output in a variable)
 packer_out=$(packer build golden_image.json | tee /dev/tty)
 
