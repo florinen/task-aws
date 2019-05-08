@@ -24,7 +24,7 @@
          },
          {
             "type": "shell",
-            "execute_command": "chmod +x '{{ .Path }}'; sudo bash '{{ .Path }}'",
+            "execute_command": "chmod +x '{{ .Path }}'; sudo su - bash '{{ .Path }}'",
             "scripts": [".print.sh"]
           }
      ]
