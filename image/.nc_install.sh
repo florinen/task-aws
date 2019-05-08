@@ -33,7 +33,7 @@ sudo cat <<EOF >  /etc/httpd/conf.d/nextcloud.conf
   ServerName nextcloud.devopnet.com
   DocumentRoot /var/www/html/nextcloud
   <directory /var/www/html/nextcloud>
-	  Require all granted
+    Require all granted
     AllowOverride All
     Options FollowSymLinks MultiViews
     SetEnv HOME /var/www/html/nextcloud
