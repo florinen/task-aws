@@ -16,7 +16,7 @@
          {
              "type": "shell",
              "execute_command": "chmod +x {{ .Path }}; sudo -s bash '{{ .Path }}'",
-             "scripts": [ ".nc_install.sh", ".print.sh" ]
+             "scripts": [ ".nc_install.sh" ]
               
          }
      ]
