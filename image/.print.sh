@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # run packer (prints to stdout, but stores the output in a variable)
-sudo packer_out=$(packer build golden_image.json | sudo tee /dev/tty)
+sudo packer_out=$(packer build golden_image.json |  tee /dev/tty)
 
 # packer prints the id of the generated AMI in its last line
 sudo ami=$(echo "$packer_out" | tail -c 30 | perl -n -e'/: (ami-.+)$/ && print $1')

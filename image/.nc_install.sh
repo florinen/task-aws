@@ -1,4 +1,6 @@
 #!/bin/bash
+
+
 # Follow the steps bellow to install and configure Nextcloud 15 on your CentOS 7 server. 
 # It can be a freshly installed or a server with running applications provided you can satisfy pre-requisites and required dependencies
 # PHP, we will use PHP 7.3 since it is the latest stable release of PHP available for CentOS 7. 
