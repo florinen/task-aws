@@ -1,6 +1,6 @@
 resource "aws_launch_configuration" "l-config" {
     name = "${var.lc_name}"
-    image_id = "${var.amis}"
+    image_id = "${var.ami}"
     instance_type = "${var.instance_type}"
     associate_public_ip_address = true
     security_groups = ["${aws_security_group.webserver.id}"]
