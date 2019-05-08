@@ -11,7 +11,7 @@
 
 
 packer build golden_image.json  2>&1 | sudo tee output.txt
-sudo tail -2 output.txt | head -2 | sudo awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > sudo ami.txt
+tail -2 output.txt | head -2 | sudo awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > sudo ami.txt
 
 # create the 'ami.tf' file from the template:
-export AMI_GENERATED_BY_PACKER= ami.txt && envsubst < ami.tf.template > /root/task-aws/ami.tf
+#export AMI_GENERATED_BY_PACKER= ami.txt && envsubst < ami.tf.template > /root/task-aws/ami.tf
