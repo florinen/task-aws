@@ -19,9 +19,14 @@
          {
              "type": "shell",
              "execute_command": "chmod +x '{{ .Path }}'; sudo bash '{{ .Path }}'",
-             "scripts": [ ".nc_install.sh", ".print.sh" ]
+             "scripts": [ ".nc_install.sh" ]
               
-         }
+         },
+         {
+            "type": "shell",
+            "execute_command": "chmod +x '{{ .Path }}'; sudo bash '{{ .Path }}'",
+            "scripts": [".print.sh"]
+          }
      ]
 
 }
