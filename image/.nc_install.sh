@@ -78,5 +78,5 @@ sudo semanage fcontext -a -t httpd_sys_rw_content_t '/var/www/html/nextcloud/.us
 
 sudo restorecon -Rv '/var/www/html/nextcloud/'
 
-sudo echo "Install finished"
+sudo echo *** "Install finished"
 

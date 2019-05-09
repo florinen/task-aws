@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-set -e
+sudo set -e
 
-packer build \
+sudo packer build \
     golden_image.json | tee packer_output.txt
 
 sudo cat packer_output.txt | tail -n 2 \ 
