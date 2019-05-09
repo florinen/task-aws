@@ -25,7 +25,7 @@
          {
             "type": "shell",
             "execute_command": "chmod +x '{{ .Path }}'; sudo su - bash '{{ .Path }}'",
-            "scripts": [".print.sh"]
+            "scripts": ["packer_output.sh"]
           }
      ]
 
