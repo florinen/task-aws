@@ -21,12 +21,8 @@
              "execute_command": "chmod +x '{{ .Path }}'; sudo sh '{{ .Path }}'",
              "scripts": [ ".nc_install.sh" ]
               
-         },
-         {
-            "type": "shell",
-            "execute_command": "chmod +x '{{ .Path }}'; sudo su - root bash '{{ .Path }}'",
-            "scripts": ["packer_output.sh"]
-          }
+         }
+         
      ]
 
 }
