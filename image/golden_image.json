@@ -6,8 +6,11 @@
     "instance_type": "t2.micro",
     "ssh_username": "centos",
     "ami_name": "nextcloud-{{timestamp}}",
+    "source_ami_filter": {
+        "most_recent": true
+    },
     "tags": {
-        "Name": "nextcloud-{{timestamp}}",
+        "Name": "nextcloud-{{timestamp +1}}",
         "OS_Version": "Centos 7"
     }
 
@@ -15,10 +18,11 @@
      "provisioners": [
          {
              "type": "shell",
-             "execute_command": "chmod +x {{ .Path }}; sudo -s bash '{{ .Path }}'",
-             "script": ".nc_install.sh"
+             "execute_command": "chmod +x '{{ .Path }}'; sudo sh '{{ .Path }}'",
+             "scripts": [ ".nc_install.sh" ]
               
          }
+         
      ]
 
 }
